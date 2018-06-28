@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+    Servicios.DTO.VisaUsuario session = (Servicios.DTO.VisaUsuario)System.Web.HttpContext.Current.Session["SesionActiva"];
+}
+
+
+<!-- Navegación-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#">Panel de Administración</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="user-panel">
+        <div class="image">
+            <img src="~/Iconos/User.png" class="img-circle elevation-2" alt="User Image" style="width:7%;">
+        </div>
+        <div class="info">
+            <h6 class="text-white" style="margin-left:55px; margin-top:-27px;">Administrador</h6>
+        </div>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa fa-pencil-square-o"></i>
+                    <span class="nav-link-text">Catálogos</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseMulti">
+                    <li>
+                        <a href="@Url.Action("Index", "Productos")">Signos Zodiacales</a>
+                    </li>
+                    @*<li>
+                        <a href="@Url.Action("Index", "Proveedor")">Proveedores</a>
+                    </li>*@
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-sign-out"></i>Salir
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

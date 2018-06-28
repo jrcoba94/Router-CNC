@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+<div class="products">
+    <div class="container">
+        <h3><span>Productos</span></h3>
+        <div class="products-top">
+            <div id="imageContent" class="col-md-3 prod">
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            async: true,
+            type: 'POST',
+            url: '@Url.Action("get_Productos", "Sitio")',
+            success: function (data) {
+                $("#imageContent").html(data).append("<br/>");
+                var images = data.split("|||");
+                for (var i = 0, j = images.length; i < j; i++) {
+                    $("#imageContent").append("<img src='" + images[i] + "' width='300'>");
+                }
+            }
+        });
+    });
+</script>

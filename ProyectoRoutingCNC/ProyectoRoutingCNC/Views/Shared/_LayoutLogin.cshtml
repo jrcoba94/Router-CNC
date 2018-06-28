@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="google-site-verification" content="6Aqtf8frhqGKmv10yV9WpASBG5WfqJlT4s4fujdbnr4" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>Login</title>
+
+    @RenderPage(Url.Content("~/Views/Shared/_Heads.cshtml"))
+
+</head>
+<body @*class="bg-dark"*@ style="color:gray">
+    <!-- Contenedor general -->
+    <div class="row-fluid">
+        <div class="form-content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121081377-1"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121081377-1');
+    </script>
+
+</body>
+</html>

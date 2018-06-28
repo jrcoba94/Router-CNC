@@ -1,0 +1,79 @@
+﻿<header class="header-top">
+    <div class="header-top container">
+        <div class="col-md-4">
+            <h3><span>Teléfono</span> : +52 1 999 997 0104</h3>
+        </div>
+        <div class="col-md-4">
+            <a href=""><img src="~/Iconos/Logo.png" class="img-responsive" alt=""></a>
+        </div>
+        <div class="col-md-4">
+            <h3><span>localización</span> : Calle 115 No. 404 por Calle 50, Santa Rosa, 97279 Mérida, Yuc.</h3>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</header>
+<nav class="banner">
+    <div class="container">
+        <div class="head-nav">
+            <span class="menu"> </span>
+            <ul>
+                <li class="active"><a href="@Url.Action("Index", "Sitio")" style="color:#FFFFFF">INICIO</a></li>
+                @*<li><a href="@Url.Action("Nosotros", "Sitio")">¿QUIENES SOMOS?</a></li>*@
+                <li><a href="@Url.Action("Mision", "Sitio")" style="color:#FFFFFF">MISION</a></li>
+                <li><a href="@Url.Action("Vision", "Sitio")" style="color:#FFFFFF">VISION</a></li>
+                @*<li><a href="@Url.Action("Productos", "Sitio")" style="color:#FFFFFF">IMAGENES</a></li>*@
+                <li><a href="@Url.Action("Contactanos", "Sitio")" style="color:#FFFFFF">CONTACTO</a></li>
+                <li><a href="@Url.Action("Index", "Login")" style="color:#FFFFFF">LOGIN</a></li>
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
+        <script>
+            $("span.menu").click(function () {
+                $(".head-nav ul").slideToggle(300, function () {
+                });
+            });
+        </script>
+        <section class="slider">
+            <div class="flexslider">
+                <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                    <ul class="slides" style="width: 1000%; transition-duration: 0s; transform: translate3d(-2280px, 0px, 0px);">
+                        <li class="clone" style="width: 1140px; float: left; display: block;">
+                            <div class="banner-info">
+                                <h1 style="color:#FFFFFF">Impresora CNC</h1>
+                                <p style="color:#FFFFFF">Selecciona una imagen y sorprendete con nuestros grabados hechos por medio de la impresora!.</p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </li>
+                        <li style="width: 1140px; float: left; display: block;" class="flex-active-slide">
+                            <div class="banner-info">
+                                <h1 style="color:#FFFFFF">Servicio</h1>
+                                <p style="color:#FFFFFF">Ofrecemos un servicio personalizado con amplia experiencia para lograr resolver cualquiera de sus necesidades.</p>
+                            </div>
+                        </li>
+                        <li style="width: 1140px; float: left; display: block;" class="flex-active-slide">
+                            <div class="banner-info">
+                                <h1 style="color:#FFFFFF">¿Cómo puedo obtener información?</h1>
+                                <p style="color:#FFFFFF">Puedes contactarnos por medio de nuestra página web para más información.</p>
+                            </div>
+                        </li>
+                        <li style="width: 1140px; float: left; display: block;" class="flex-active-slide">
+                            <div class="banner-info">
+                                <h1 style="color:#FFFFFF">¿Cómo trabaja?</h1>
+                                <p style="color:#FFFFFF">Los router CNC están automatizadas con un control numérico por computadora que permite especificar las trayectorias y profundidades de los cortes en diferentes materiales como madera, aluminio, acrílico, MDF, y plásticos.</p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </li>
+                        <li style="width: 1140px; float: left; display: block;" class="flex-active-slide">
+                            <div class="banner-info">
+                                <h1 style="color:#FFFFFF">¿Cómo puedo mandar mi imagen?</h1>
+                                <p style="color:#FFFFFF">Es fácil, puedes mandarnos tu imagen a través de nuestro formulario de contacto</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li><li><a class="">3</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Siguiente</a></li></ul>
+            </div>
+        </section>
+        
+    </div>
+</nav>
