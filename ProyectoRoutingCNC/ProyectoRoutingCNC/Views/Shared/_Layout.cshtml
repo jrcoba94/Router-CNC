@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="6Aqtf8frhqGKmv10yV9WpASBG5WfqJlT4s4fujdbnr4" />
+    @RenderPage(Url.Content("~/Views/Shared/_Heads.cshtml"))
+</head>
+<body>
+
+    <div class="row no-mr bg-header h-70">
+        @RenderPage(Url.Content("~/Views/Shared/_Navbar.cshtml"))
+    </div>
+    <!-- /.container-fluid-->
+    <!-- Scroll para el botón del encabezado-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Desea salir del sistema?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "Salir" si realmente usted desea cerrar sesión.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Sitio")">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            @RenderPage(Url.Content("~/Views/Shared/_Footer.cshtml"))
+        </footer>
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121081377-1"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121081377-1');
+    </script>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#dataTable_info").remove();
+        $("ul").remove(".pagination");
+        $("th").removeClass("sorting_asc");
+        $("th").removeClass("sorting");
+        $("#dataTable_length").remove();
+        $("#dataTable_filter").remove();
+        $("bl").removeClass();
+    });
+</script>
