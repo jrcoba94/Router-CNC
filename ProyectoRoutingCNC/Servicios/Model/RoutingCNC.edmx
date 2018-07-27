@@ -67,6 +67,9 @@
           <Property Name="NombreUsuarioPanel" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Clave" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Estatus" Type="smallint" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="30" />
+          <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="30" />
+          <Property Name="CorreoElectronico" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <Association Name="FK_ImagenProducto_Producto">
           <End Role="Producto" Type="Self.Producto" Multiplicity="1">
@@ -174,6 +177,9 @@
           <Property Name="NombreUsuarioPanel" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Clave" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Estatus" Type="Int16" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ImagenProducto_Producto">
           <End Type="RoutingCNCModel.Producto" Role="Producto" Multiplicity="1">
@@ -257,6 +263,9 @@
           <EntitySetMapping Name="UsuariosPanel">
             <EntityTypeMapping TypeName="RoutingCNCModel.UsuariosPanel">
               <MappingFragment StoreEntitySet="UsuariosPanel">
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="NombreUsuarioPanel" ColumnName="NombreUsuarioPanel" />

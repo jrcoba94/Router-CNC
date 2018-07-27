@@ -86,6 +86,7 @@ namespace Servicios.Servicios
                 {
                     Usuario oUsuario = db.Usuario.Where(x => x.UsuarioID == id).FirstOrDefault();
                     oUsuario.Estatus = false;
+                    //oUsuario.Estatus = 0;
                     db.SaveChanges();
                 }
             }

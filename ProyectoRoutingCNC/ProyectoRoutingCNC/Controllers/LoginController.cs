@@ -92,6 +92,9 @@ namespace ProyectoRoutingCNC.Controllers
             CrearCookie(sesion);
             entSession.UserPanID = sesion.UsuariosPanelID;
             entSession.NombreUsuarioPanel = sesion.NombreUsuarioPanel;
+            entSession.ApellidoPaterno = sesion.ApellidoPaterno;
+            entSession.ApellidoMaterno = sesion.ApellidoMaterno;
+            entSession.CorreoEletronico = sesion.CorreoElectronico;
             //entSession.Nombre = sesion.NOMBRE;
             entSession.Estatus = sesion.Estatus;
 

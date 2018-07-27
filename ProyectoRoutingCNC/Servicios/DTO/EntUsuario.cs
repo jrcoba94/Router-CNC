@@ -20,6 +20,24 @@ namespace Servicios.DTO
             set;
         }
 
+        public string ApellidoPaterno
+        {
+            get;
+            set;
+        }
+
+        public string ApellidoMaterno
+        {
+            get;
+            set;
+        }
+
+        public string CorreoEletronico
+        {
+            get;
+            set;
+        }
+
         public string Clave
         {
             get;

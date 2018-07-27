@@ -18,5 +18,8 @@ namespace Servicios.Model
         public string NombreUsuarioPanel { get; set; }
         public string Clave { get; set; }
         public short Estatus { get; set; }
+        public string ApellidoPaterno { get; set; }
+        public string ApellidoMaterno { get; set; }
+        public string CorreoElectronico { get; set; }
     }
 }
