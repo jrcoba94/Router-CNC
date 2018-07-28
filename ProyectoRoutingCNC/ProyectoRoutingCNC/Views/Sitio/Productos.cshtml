@@ -8,19 +8,21 @@
         <div class="products-top">
             @foreach (var item in Model)
             {
-                @*<div class="container">
-                    <div class="row">*@
-                        <div id="imageContent" class="col-md-3 prod-1">
-                            <image src="~/@item.ImagenPortada" width="200" height="200"></image>
-                        </div>
-                        @*<div class="col-md-3">
-                            @item.Nombre
-                        </div>
-                        <div class="col-md-3">
-                            @item.Descripcion
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12" style="margin-bottom:15px;margin-top:15px">
+                            <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
+                                <image src="~/@item.ImagenPortada" width="200" height="200" class="img-responsive"></image>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                @item.Nombre
+                            </div>
+                            <div class="col-md-3 text-justify">
+                                @item.Descripcion
+                            </div>
                         </div>
                     </div>
-                </div>*@
+                </div>
             }
             <div class="clearfix"> </div>
         </div>

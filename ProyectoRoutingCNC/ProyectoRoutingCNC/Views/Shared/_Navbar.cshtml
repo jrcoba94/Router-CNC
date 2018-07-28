@@ -9,7 +9,7 @@
 {
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     
-    <a class="navbar-brand" href="#">Panel de Administración</a>
+    <a class="navbar-brand" href="">Panel de Administración</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,6 +22,7 @@
             <h6 class="text-white" style="margin-left:95px; margin-top:-27px;">@(session.Usuario.ApellidoPaterno)</h6>
             <h6 class="text-white" style="margin-left:150px; margin-top:-27px;">@(session.Usuario.ApellidoMaterno)</h6>
             <h6 class="text-white" style="margin-left:200px; margin-top:-27px;">E-mail: @(session.Usuario.CorreoEletronico)</h6>
+            <a class="btn btn-primary btn-default" href="@Url.Action("Index", "Sitio")" style="width:200px; margin-top:-60px; margin-left:450px;" target="_blank">Ir a la página de inicio</a>
         </div>
     </div>
     <div class="collapse navbar-collapse" id="navbarResponsive">
