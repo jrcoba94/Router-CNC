@@ -75,13 +75,13 @@ namespace ProyectoRoutingCNC.Controllers
                 }
                 else
                 {
-                    ViewBag.Msj = "No fue posible iniciar sesion con las credenciales proporcionadas";
+                    ViewBag.Msj = "No fue posible iniciar sesion por favor intente de nuevo";
                 }
                 return View("Login");
             }
             else
             {
-                ViewBag.Msj = "No fue posible iniciar sesion con las credenciales proporcionadas";
+                ViewBag.Msj = "No fue posible iniciar sesion por favor intente de nuevo";
                 return View("Login");
             }
         }

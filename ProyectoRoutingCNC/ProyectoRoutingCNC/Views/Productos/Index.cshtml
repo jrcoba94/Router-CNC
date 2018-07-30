@@ -46,7 +46,7 @@
                                     <td>
                                         @Html.ActionLink("Editar", "Edit", new { id = item.ProductoID })
                                         @Html.ActionLink("Detalle", "Detalles", new { id = item.ProductoID })
-                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID })
+                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID }, new { onclick = "return confirm('¿Desea eliminar este registro?');" })
                                     </td>
                                 </tr>                               
                             </tbody>
@@ -57,3 +57,4 @@
         </div>
     </div>
 </div>
+
