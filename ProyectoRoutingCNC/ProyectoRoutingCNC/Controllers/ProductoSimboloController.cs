@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using Servicios.Model;
 using Servicios.Servicios;
 using PagedList;
+using System.Net;
+using System.IO;
+using System.Data.Entity;
 
 namespace ProyectoRoutingCNC.Controllers
 {
@@ -22,5 +25,202 @@ namespace ProyectoRoutingCNC.Controllers
         {
             return View(db.ProductoSimbolo.ToList().ToPagedList(page ?? 1, 5));
         }
+
+        public ActionResult Detalles(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductoSimbolo oProductoSimbolo = db.ProductoSimbolo.Find(id);
+            if (oProductoSimbolo == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Detalle", oProductoSimbolo);
+        }
+
+        #region Método que se encarga de dar de alta a un nuevo Producto
+
+        // GET: Productos/Create
+        public ActionResult Create()
+        {
+            //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor");
+            return View("Crear");
+        }
+
+        // POST: Productos/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ProductoSimbolo oProductoSimbolo, HttpPostedFileBase files)
+        {
+            try
+            {
+
+
+                if (ModelState.IsValid)
+                {
+
+                    UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
+                    HttpPostedFileBase file = Request.Files["files"];
+                    var directorio = UploadDirectory;
+                    string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
+                    string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
+                    string resultFileUrl = directorio + resultFileName;
+                    string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
+
+                    bool hasFile = false;
+                    ImagenProducto oImgProduct = null;
+
+                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        file.SaveAs(resultFilePath);
+                        oProductoSimbolo.ImagenPortadaSimbolo = /*servername +*/ resultFileUrl.Replace("~/", "");
+
+                        oImgProduct = new ImagenProducto();
+                        oImgProduct.Url = oProductoSimbolo.ImagenPortadaSimbolo.Replace("~/", "");
+
+                        hasFile = true;
+                    }
+
+                    db.ProductoSimbolo.Add(oProductoSimbolo);
+                    db.SaveChanges();
+
+                    oImgProduct.ProductoID = oProductoSimbolo.ProductoSimboloID;
+                    db.ImagenProducto.Add(oImgProduct);
+                    db.SaveChanges();
+
+                    if (hasFile)
+                    {
+                        oImgProduct.ProductoID = oProductoSimbolo.ProductoSimboloID;
+                        db.SaveChanges();
+                    }
+
+
+                    //}
+
+                    return RedirectToAction("Index");
+                }
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(SrvMessages.getMessageSQL(ex));
+            }
+
+            //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor", producto.ProveedorID);
+            return View(oProductoSimbolo);
+
+        }
+
+        #endregion
+
+
+        #region Método que se encarga de editar la información de un Producto
+
+        // GET: Productos/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductoSimbolo oProductoSimbolo = db.ProductoSimbolo.Find(id);
+            if (oProductoSimbolo == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor", producto.ProveedorID);
+            return View("Editar", oProductoSimbolo);
+        }
+
+        // POST: Productos/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ProductoSimbolo oProductoSimbolo)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
+                    HttpPostedFileBase file = Request.Files["files"];
+                    var directorio = UploadDirectory;
+                    string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
+                    string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
+                    string resultFileUrl = directorio + resultFileName;
+                    string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
+
+                    bool hasFile = false;
+                    ImagenProducto oImgProduct = null;
+                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        file.SaveAs(resultFilePath);
+                        oProductoSimbolo.ImagenPortadaSimbolo = /*servername +*/ resultFileUrl.Replace("~/", "");
+
+                        oImgProduct = new ImagenProducto();
+                        oImgProduct.Url = oProductoSimbolo.ImagenPortadaSimbolo.Replace("~/", "");
+                        hasFile = true;
+                    }
+                    db.SaveChanges();
+
+                    oImgProduct.ProductoID = oProductoSimbolo.ProductoSimboloID;
+                    db.SaveChanges();
+
+                    if (hasFile)
+                    {
+                        oImgProduct.ProductoID = oProductoSimbolo.ProductoSimboloID;
+                        db.SaveChanges();
+                    }
+
+                    db.Entry(oProductoSimbolo).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(SrvMessages.getMessageSQL(ex));
+            }
+            //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor", producto.ProveedorID);
+            return View(oProductoSimbolo);
+        }
+
+        #endregion
+
+
+        #region Método que se encarga de dar de baja a un registro
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductoSimbolo oProductoSimbolo = db.ProductoSimbolo.Find(id);
+            if (oProductoSimbolo == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Eliminar", oProductoSimbolo);
+        }
+
+        // POST: Productos/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+
+            ProductoSimbolo oProductoSimbolo = db.ProductoSimbolo.Find(id);
+            db.ProductoSimbolo.Remove(oProductoSimbolo);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }

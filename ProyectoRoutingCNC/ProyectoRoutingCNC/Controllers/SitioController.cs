@@ -17,6 +17,7 @@ namespace ProyectoTelas.Controllers
         #region Instancias y Variables
         //SrvProveedor oSrvProveedor = new SrvProveedor();
         SrvProducto oSrvProducto = new SrvProducto();
+        Contacto oContacto = new Contacto();
         #endregion
 
         // GET: Sitio
@@ -92,45 +93,94 @@ namespace ProyectoTelas.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult EnviarCorreo(string nombre, string asunto, string mensaje, HttpPostedFileBase fichero)
-        {
-            try
-            {
-                MailMessage correo = new MailMessage();
-                correo.From = new MailAddress("proyectoroutingcnc@gmail.com", "CNC");
-                correo.To.Add(nombre);
-                correo.Subject = asunto;
-                correo.Body = mensaje;
-                correo.IsBodyHtml = true;
-                correo.Priority = MailPriority.Normal;
+        //[HttpPost]
+        //public ActionResult EnviarCorreo(string nombre, string asunto, string mensaje, HttpPostedFileBase fichero)
+        //{
+        //    try
+        //    {
+        //        MailMessage correo = new MailMessage();
+        //        correo.From = new MailAddress("proyectoroutingcnc@gmail.com", "CNC");
+        //        correo.To.Add(nombre);
+        //        correo.Subject = asunto;
+        //        correo.Body = mensaje;
+        //        correo.IsBodyHtml = true;
+        //        correo.Priority = MailPriority.Normal;
 
-                //Se almacena los archivos adjuntos en una carpeta creada en el proyecto temporal
-                string ruta = Server.MapPath("../Temporal");
-                fichero.SaveAs(ruta + "\\" + fichero.FileName);
+        //        //Agregadas
+        //        correo.SubjectEncoding = System.Text.Encoding.UTF8;
+        //        correo.BodyEncoding = System.Text.Encoding.UTF8;
 
-                Attachment adjunto = new Attachment(ruta + "\\" + fichero.FileName);
-                correo.Attachments.Add(adjunto);
 
-                //Configuración del servidor smtp
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 25;
-                smtp.EnableSsl = true;
-                smtp.UseDefaultCredentials = true;
-                string CuentaCorreo = "proyectoroutingcnc@gmail.com";
-                string ContraseñaCorreo = "Proyecto123";
-                smtp.Credentials = new System.Net.NetworkCredential(CuentaCorreo, ContraseñaCorreo);
 
-                smtp.Send(correo);
-                ViewBag.Mensaje = "¡Gracias por contactarnos, su mensaje se envio correctamente!";
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(SrvMessages.getMessageSQL(ex));
-            }
-            return View();
-        }
+        //        //Se almacena los archivos adjuntos en una carpeta creada en el proyecto temporal
+        //        string ruta = Server.MapPath("../Temporal");
+        //        fichero.SaveAs(ruta + "\\" + fichero.FileName);
+
+        //        Attachment adjunto = new Attachment(ruta + "\\" + fichero.FileName);
+        //        correo.Attachments.Add(adjunto);
+
+        //        //Configuración del servidor smtp
+        //        SmtpClient smtp = new SmtpClient();
+        //        smtp.Host = "smtp.gmail.com";
+        //        smtp.Port = 25;
+        //        smtp.EnableSsl = true;
+        //        smtp.UseDefaultCredentials = true;
+        //        string CuentaCorreo = "proyectoroutingcnc@gmail.com";
+        //        string ContraseñaCorreo = "Proyecto123";
+        //        smtp.Credentials = new System.Net.NetworkCredential(CuentaCorreo, ContraseñaCorreo);
+
+        //        smtp.Send(correo);
+        //        ViewBag.Mensaje = "¡Gracias por contactarnos, su mensaje se envio correctamente!";
+
+        //        //using (RoutingCNCEntities db = new RoutingCNCEntities())
+        //        //{                                       
+        //        //oContacto.CorreoElectronico = correo;
+        //        //db.Contacto.Add(oContacto);
+        //        //db.SaveChanges();
+        //        //}
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(SrvMessages.getMessageSQL(ex));
+        //    }
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public ActionResult Contacto(string receiverEmail, string subject, string message, HttpPostedFileBase fichero)
+        //{
+        //    try
+        //    {
+        //        MailMessage co = new MailMessage();
+        //        co.From = new MailAddress(receiverEmail);
+        //        co.To.Add("proyectoroutingcnc@gmail.com");
+        //        co.Subject = subject;
+        //        co.SubjectEncoding = System.Text.Encoding.UTF8;
+        //        co.Body = message;
+        //        co.BodyEncoding = System.Text.Encoding.UTF8;
+        //        co.IsBodyHtml = true;
+        //        co.Priority = MailPriority.Normal;
+
+        //        string ruta = Server.MapPath("~/Temporal");
+        //        fichero.SaveAs(ruta + "\\" + fichero.FileName);
+
+        //        Attachment adjunto = new Attachment(ruta + "\\" + fichero.FileName);
+        //        co.Attachments.Add(adjunto);
+
+        //        SmtpClient smtp = new SmtpClient();
+        //        smtp.Host = "smtp.gmail.com";
+        //        smtp.Port = 25;
+        //        smtp.EnableSsl = true;
+        //        smtp.UseDefaultCredentials = true;
+        //        smtp.Credentials = new NetworkCredential("proyectoroutingcnc@gmail.com", "RoutingCNC-2018");
+        //        smtp.Send(co);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Error : " + ex.Message);
+        //    }
+        //    return View();
+        //}
 
         [HttpPost]
         public ActionResult Contacto(string receiverEmail, string subject, string message, HttpPostedFileBase fichero)
@@ -176,12 +226,13 @@ namespace ProyectoTelas.Controllers
                         smtp.Send(mess);
                     }
 
-                    //using (Entities db = new Entities())
+                    //using (RoutingCNCEntities db = new RoutingCNCEntities())
                     //{
-                    //    oContacto.CorreoElectronico = correo;
-                    //    db.Contacto.Add(oContacto);
-                    //    db.SaveChanges();
-                    //    return RedirectToAction("Index");
+
+                        //oContacto.CorreoElectronico = correo;
+                        //db.Contacto.Add(oContacto);
+                        //db.SaveChanges();
+                        //return RedirectToAction("Index");
                     //}
                 }
             }

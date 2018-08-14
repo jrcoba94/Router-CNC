@@ -6,7 +6,7 @@
     <div class="container">
         <h2 class="slideInLeft">Escríbenos</h2>
             <div class="contact-form">
-                <form method="post" class="left_form" action="~/Sitio/Contacto">
+                <form method="post" class="left_form" action="~/Sitio/Contacto" enctype="multipart/form-data">
                     <div class="col-sm-12">
                         <span><label class="slideInLeft">Nombre</label></span>
                         <span><input name="subject" type="text" class="textbox slideInLeft" placeholder="Nombre"></span>@*subject*@
@@ -24,7 +24,7 @@
                         <span><input type="file" class="btn btn-default slideInLeft" name="fichero" style="width:95%"></span>
                     </div>
                     <div class="col-sm-12 col-sm-pull-10">
-                        <span><input type="submit" value="Enviar" class="myButton slideInLeft" style="width:91px;"></span>
+                        <span><input type="submit" value="Enviar" id="Enviar" class="myButton slideInLeft" style="width:91px;"></span>
                     </div>
                 </form>
 

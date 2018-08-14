@@ -7,11 +7,12 @@
 
 <div class="content-wrapper">
     <div class="container-fluid">
-
+        <br />
         <p>
             <button type="button" class="btn btn-default">
                 @Html.ActionLink("Agregar nuevo dibujo", "Create")
             </button>
+            <a class="btn btn-danger btn-default" href="@Url.Action("Index", "Panel")" style="width:200px;">Volver</a>
         </p>
 
         <!-- Tabla de Registros-->

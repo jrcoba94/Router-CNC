@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RoutingCNCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="ContactoID" />
+          </Key>
+          <Property Name="ContactoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <EntityType Name="ImagenProducto">
           <Key>
             <PropertyRef Name="ImagenProductoID" />
@@ -86,6 +95,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RoutingCNCModelStoreContainer">
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImagenProducto" EntityType="Self.ImagenProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductoDibujosAnimados" EntityType="Self.ProductoDibujosAnimados" Schema="dbo" store:Type="Tables" />
@@ -102,6 +112,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="RoutingCNCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="RoutingCNCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacto" EntityType="RoutingCNCModel.Contacto" />
           <EntitySet Name="ImagenProducto" EntityType="RoutingCNCModel.ImagenProducto" />
           <EntitySet Name="Producto" EntityType="RoutingCNCModel.Producto" />
           <EntitySet Name="ProductoDibujosAnimados" EntityType="RoutingCNCModel.ProductoDibujosAnimados" />
@@ -113,6 +124,15 @@
             <End Role="ImagenProducto" EntitySet="ImagenProducto" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="ContactoID" />
+          </Key>
+          <Property Name="ContactoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Comentario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="ImagenProducto">
           <Key>
             <PropertyRef Name="ImagenProductoID" />
@@ -201,6 +221,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RoutingCNCModelStoreContainer" CdmEntityContainer="RoutingCNCEntities">
+          <EntitySetMapping Name="Contacto">
+            <EntityTypeMapping TypeName="RoutingCNCModel.Contacto">
+              <MappingFragment StoreEntitySet="Contacto">
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ContactoID" ColumnName="ContactoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ImagenProducto">
             <EntityTypeMapping TypeName="RoutingCNCModel.ImagenProducto">
               <MappingFragment StoreEntitySet="ImagenProducto">

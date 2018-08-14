@@ -65,6 +65,9 @@
     <Compile Include="DTO\UsuarioExt.cs" />
     <Compile Include="DTO\VisaUsuario.cs" />
     <Compile Include="Enum\EnumEstados.cs" />
+    <Compile Include="Model\Contacto.cs">
+      <DependentUpon>RoutingCNC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ImagenProducto.cs">
       <DependentUpon>RoutingCNC.tt</DependentUpon>
     </Compile>

@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<Servicios.Model.Producto>
 @{
     Layout = "~/Views/Shared/_Principal.cshtml";
+
+    List<Servicios.Model.ProductoDibujosAnimados> oListProductoDibujoAnimados = new List<Servicios.Model.ProductoDibujosAnimados>();
+    List<Servicios.Model.ProductoSimbolo> oListProductoSimbolo = new List<Servicios.Model.ProductoSimbolo>();
 }
 <div class="products">
     <div class="container">
@@ -10,7 +13,7 @@
             {
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12" style="margin-bottom:15px;margin-top:15px">
+                        <div class="col-sm-6" style="margin-bottom:15px;margin-top:15px">
                             <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
                                 <image src="~/@item.ImagenPortada" width="200" height="200" class="img-responsive rotateIn"></image>
                             </div>
@@ -19,6 +22,25 @@
                             </div>
                             <div class="col-md-3 text-justify bounceInDown">
                                 @item.Descripcion
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @foreach (var itemListaPAnimados in oListProductoDibujoAnimados)
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6" style="margin-bottom:15px;margin-top:15px">
+                            <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
+                                <image src="~/@itemListaPAnimados.ImagenPortadaDibujo" width="200" height="200" class="img-responsive rotateIn"></image>
+                            </div>
+                            <div class="col-md-3 text-center bounceInDown">
+                                @itemListaPAnimados.NombreDibujo
+                            </div>
+                            <div class="col-md-3 text-justify bounceInDown">
+                                @itemListaPAnimados.DescripcionDibujo
                             </div>
                         </div>
                     </div>
