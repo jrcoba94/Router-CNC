@@ -26,6 +26,16 @@ namespace ProyectoRoutingCNC.Controllers
             return View(db.ProductoDibujosAnimados.ToList().ToPagedList(page ?? 1, 5));
         }
 
+        public ActionResult CrearDibujo()
+        {
+            return View("Crear");
+        }
+
+        public ActionResult Regresar()
+        {
+            return View("Index");
+        }
+
         public ActionResult Detalles(int id)
         {
             if (id == null)

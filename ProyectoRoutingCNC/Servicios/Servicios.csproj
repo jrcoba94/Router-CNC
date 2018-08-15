@@ -77,6 +77,9 @@
     <Compile Include="Model\ProductoDibujosAnimados.cs">
       <DependentUpon>RoutingCNC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ProductoFigurasGeometricas.cs">
+      <DependentUpon>RoutingCNC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ProductoSimbolo.cs">
       <DependentUpon>RoutingCNC.tt</DependentUpon>
     </Compile>
@@ -106,6 +109,7 @@
     <Compile Include="Servicios\SrvMessages.cs" />
     <Compile Include="Servicios\SrvProducto.cs" />
     <Compile Include="Servicios\SrvProductoDibujosAnimados.cs" />
+    <Compile Include="Servicios\SrvProductoFigurasGeometricas.cs" />
     <Compile Include="Servicios\SrvProductoSimbolo.cs" />
     <Compile Include="Servicios\SrvUsuario.cs" />
   </ItemGroup>

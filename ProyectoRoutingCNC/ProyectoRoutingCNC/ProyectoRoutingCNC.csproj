@@ -160,6 +160,17 @@
     <Content Include="Iconos\1.jpg" />
     <Content Include="Iconos\4.jpg" />
     <Content Include="Iconos\DibujoAnimado.png" />
+    <Content Include="Iconos\DibujosAnimados\Bart.jpg" />
+    <Content Include="Iconos\DibujosAnimados\Cobra.jpg" />
+    <Content Include="Iconos\DibujosAnimados\Cobrakai.jpg" />
+    <Content Include="Iconos\DibujosAnimados\Conejo.jpg" />
+    <Content Include="Iconos\DibujosAnimados\DibujosAnimadosPortada.png" />
+    <Content Include="Iconos\DibujosAnimados\Gato.jpg" />
+    <Content Include="Iconos\DibujosAnimados\Goku.png" />
+    <Content Include="Iconos\DibujosAnimados\Goku1.jpg" />
+    <Content Include="Iconos\DibujosAnimados\Perro.jpg" />
+    <Content Include="Iconos\DibujosAnimados\Perro1.jpg" />
+    <Content Include="Iconos\DibujosAnimados\Sol.jpg" />
     <Content Include="Iconos\facebook-logo-button.png" />
     <Content Include="Iconos\FigurasGeometricas.png" />
     <Content Include="Iconos\FigurasGeometricasCopia.png" />
@@ -172,6 +183,7 @@
     <Content Include="Iconos\SignosZodiacalesCopia.png" />
     <Content Include="Iconos\Simbolos.png" />
     <Content Include="Iconos\SimbolosCopia.png" />
+    <Content Include="Iconos\Simbolos\SimbolosPortada.png" />
     <Content Include="Iconos\twitter-logo-button.png" />
     <Content Include="Iconos\User.png" />
     <Content Include="Iconos\Vision.png" />
@@ -321,9 +333,11 @@
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\PrincipalController.cs" />
     <Compile Include="Controllers\ProductoDibujosAnimadosController.cs" />
+    <Compile Include="Controllers\ProductoFigurasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProductoSimboloController.cs" />
     <Compile Include="Controllers\SitioController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -374,6 +388,16 @@
     <Content Include="Views\ProductoSimbolo\Detalle.cshtml" />
     <Content Include="Views\ProductoSimbolo\Editar.cshtml" />
     <Content Include="Views\ProductoSimbolo\Eliminar.cshtml" />
+    <Content Include="Views\ProductoFiguras\Crear.cshtml" />
+    <Content Include="Views\ProductoFiguras\Detalle.cshtml" />
+    <Content Include="Views\ProductoFiguras\Editar.cshtml" />
+    <Content Include="Views\ProductoFiguras\Eliminar.cshtml" />
+    <Content Include="Views\ProductoFiguras\Index.cshtml" />
+    <Content Include="Views\Usuarios\Crear.cshtml" />
+    <Content Include="Views\Usuarios\Detalle.cshtml" />
+    <Content Include="Views\Usuarios\Editar.cshtml" />
+    <Content Include="Views\Usuarios\Eliminar.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

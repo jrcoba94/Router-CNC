@@ -8,11 +8,10 @@
 {
     @Html.AntiForgeryToken()
 
-    <br /><br />
+    <br /><br /><br /><br /><br />
     <div class="content-wrapper">
         <div class="container-fluid">
             <div class="form-horizontal">
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="card mb-3">
                     <div class="card-header" style="background-color:#333333; color:#FFFFFF">
@@ -65,9 +64,9 @@
                                 <div class="col-md-6">
                                     <input type="submit" value="Guardar" class="btn btn-primary btn-block" />
                                     <br /><br />
-                                    <button type="button" class="btn btn-default btn-block">
-                                        @Html.ActionLink("Volver", "Index")
-                                    </button>
+                                    <a href="@Url.Action("Index","Productos")" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF">Volver
+                                        @*@Html.ActionLink("Volver", "Index")*@
+                                    </a>
                                 </div>
                             </div>
                         </div>

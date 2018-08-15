@@ -9,9 +9,7 @@
     <div class="container-fluid">
         <br />
         <p>
-            <button type="button" class="btn btn-default">
-                @Html.ActionLink("Agregar nuevo dibujo", "Create")
-            </button>
+            <a href="@Url.Action("CrearDibujo","ProductoDibujosAnimados")" class="btn btn-default" style="width:200px; background-color:#000000; color:#ffffff;">Crear nuevo dibujo</a>
             <a class="btn btn-danger btn-default" href="@Url.Action("Index", "Panel")" style="width:200px;">Volver</a>
         </p>
 
@@ -45,7 +43,7 @@
                                     <td><img src="@item.ImagenPortadaDibujo" height="80" width="80" /></td>
                                     <td>
                                         @Html.ActionLink("Editar", "Edit", new { id = item.ProductoDibujosAnimadosID })
-                                        @Html.ActionLink("Detalle", "Detalles", new { id = item.ProductoDibujosAnimadosID })
+                                        @*@Html.ActionLink("Detalle", "Detalles", new { id = item.ProductoDibujosAnimadosID })*@
                                         @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoDibujosAnimadosID })
                                     </td>
                                 </tr>

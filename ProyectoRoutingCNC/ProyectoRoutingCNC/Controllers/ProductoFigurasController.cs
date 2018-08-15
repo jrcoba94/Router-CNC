@@ -5,33 +5,32 @@ using System.Web;
 using System.Web.Mvc;
 using Servicios.Model;
 using Servicios.Servicios;
-using System.Net;
 using PagedList;
-using System.Data.Entity;
+using System.Net;
 using System.IO;
+using System.Data.Entity;
 
 namespace ProyectoRoutingCNC.Controllers
 {
-    public class ProductosController : Controller
+    public class ProductoFigurasController : Controller
     {
-        SrvProducto oSrvProducto = new SrvProducto();
+        #region Variables e Instancias
+
+        SrvProductoFigurasGeometricas oSrvProductoFigurasGeometricas = new SrvProductoFigurasGeometricas();
         private RoutingCNCEntities db = new RoutingCNCEntities();
         public string UploadDirectory = "";
 
-        // GET: Producto
+        #endregion
+
+        // GET: ProductoFiguras
         public ActionResult Index(int? page)
         {
-            return View(db.Producto.ToList().ToPagedList(page ?? 1, 5));
+            return View(db.ProductoFigurasGeometricas.ToList().ToPagedList(page ?? 1, 5));
         }
 
-        public ActionResult CrearSigno()
+        public ActionResult CrearFigura()
         {
             return View("Crear");
-        }
-
-        public ActionResult Regresar()
-        {
-            return View("Index");
         }
 
         public ActionResult Detalles(int id)
@@ -40,12 +39,12 @@ namespace ProyectoRoutingCNC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto oProducto = db.Producto.Find(id);
-            if (oProducto == null)
+            ProductoFigurasGeometricas oProductoFigurasGeometricas = db.ProductoFigurasGeometricas.Find(id);
+            if (oProductoFigurasGeometricas == null)
             {
                 return HttpNotFound();
             }
-            return View("Detalle", oProducto);
+            return View("Detalle", oProductoFigurasGeometricas);
         }
 
         #region Método que se encarga de dar de alta a un nuevo Producto
@@ -62,7 +61,7 @@ namespace ProyectoRoutingCNC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Producto producto, HttpPostedFileBase files)
+        public ActionResult Create(ProductoFigurasGeometricas oProductoFigurasGeometricas, HttpPostedFileBase files)
         {
             try
             {
@@ -70,7 +69,6 @@ namespace ProyectoRoutingCNC.Controllers
 
                 if (ModelState.IsValid)
                 {
-
                     UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
                     HttpPostedFileBase file = Request.Files["files"];
                     var directorio = UploadDirectory;
@@ -85,24 +83,24 @@ namespace ProyectoRoutingCNC.Controllers
                     if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
                     {
                         file.SaveAs(resultFilePath);
-                        producto.ImagenPortada = /*servername +*/ resultFileUrl.Replace("~/", "");
+                        oProductoFigurasGeometricas.ImagenPortadaFigura = /*servername +*/ resultFileUrl.Replace("~/", "");
 
                         oImgProduct = new ImagenProducto();
-                        oImgProduct.Url = producto.ImagenPortada.Replace("~/", "");
+                        oImgProduct.Url = oProductoFigurasGeometricas.ImagenPortadaFigura.Replace("~/", "");
 
                         hasFile = true;
                     }
 
-                    db.Producto.Add(producto);
+                    db.ProductoFigurasGeometricas.Add(oProductoFigurasGeometricas);
                     db.SaveChanges();
 
-                    oImgProduct.ProductoID = producto.ProductoID;
+                    oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
                     db.ImagenProducto.Add(oImgProduct);
                     db.SaveChanges();
 
                     if (hasFile)
                     {
-                        oImgProduct.ProductoID = producto.ProductoID;
+                        oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
                         db.SaveChanges();
                     }
 
@@ -119,7 +117,7 @@ namespace ProyectoRoutingCNC.Controllers
             }
 
             //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor", producto.ProveedorID);
-            return View(producto);
+            return View(oProductoFigurasGeometricas);
 
         }
 
@@ -135,13 +133,13 @@ namespace ProyectoRoutingCNC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            ProductoFigurasGeometricas oProductoFigurasGeometricas = db.ProductoFigurasGeometricas.Find(id);
+            if (oProductoFigurasGeometricas == null)
             {
                 return HttpNotFound();
             }
-          //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor", producto.ProveedorID);
-            return View("Editar", producto);
+            //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor", producto.ProveedorID);
+            return View("Editar", oProductoFigurasGeometricas);
         }
 
         // POST: Productos/Edit/5
@@ -149,7 +147,7 @@ namespace ProyectoRoutingCNC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Producto producto)
+        public ActionResult Edit(ProductoFigurasGeometricas oProductoFigurasGeometricas)
         {
             try
             {
@@ -168,24 +166,24 @@ namespace ProyectoRoutingCNC.Controllers
                     if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
                     {
                         file.SaveAs(resultFilePath);
-                        producto.ImagenPortada = /*servername +*/ resultFileUrl.Replace("~/", "");
+                        oProductoFigurasGeometricas.ImagenPortadaFigura = /*servername +*/ resultFileUrl.Replace("~/", "");
 
                         oImgProduct = new ImagenProducto();
-                        oImgProduct.Url = producto.ImagenPortada.Replace("~/", "");
+                        oImgProduct.Url = oProductoFigurasGeometricas.ImagenPortadaFigura.Replace("~/", "");
                         hasFile = true;
                     }
                     db.SaveChanges();
 
-                    oImgProduct.ProductoID = producto.ProductoID;
+                    oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
                     db.SaveChanges();
 
                     if (hasFile)
                     {
-                        oImgProduct.ProductoID = producto.ProductoID;
+                        oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
                         db.SaveChanges();
                     }
 
-                    db.Entry(producto).State = EntityState.Modified;
+                    db.Entry(oProductoFigurasGeometricas).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -195,7 +193,7 @@ namespace ProyectoRoutingCNC.Controllers
                 throw new Exception(SrvMessages.getMessageSQL(ex));
             }
             //ViewBag.ProveedorId = new SelectList(db.Proveedor, "ProveedorID", "NombreProveedor", producto.ProveedorID);
-            return View(producto);
+            return View(oProductoFigurasGeometricas);
         }
 
         #endregion
@@ -209,12 +207,12 @@ namespace ProyectoRoutingCNC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            ProductoFigurasGeometricas oProductoFigurasGeometricas = db.ProductoFigurasGeometricas.Find(id);
+            if (oProductoFigurasGeometricas == null)
             {
                 return HttpNotFound();
             }
-            return View("Eliminar", producto);
+            return View("Eliminar", oProductoFigurasGeometricas);
         }
 
         // POST: Productos/Delete/5
@@ -223,8 +221,8 @@ namespace ProyectoRoutingCNC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
 
-            Producto producto = db.Producto.Find(id);
-            db.Producto.Remove(producto);
+            ProductoFigurasGeometricas oProductoFigurasGeometricas = db.ProductoFigurasGeometricas.Find(id);
+            db.ProductoFigurasGeometricas.Remove(oProductoFigurasGeometricas);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

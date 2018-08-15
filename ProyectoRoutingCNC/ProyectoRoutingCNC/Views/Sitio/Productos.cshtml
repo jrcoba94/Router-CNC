@@ -2,51 +2,94 @@
 @{
     Layout = "~/Views/Shared/_Principal.cshtml";
 
-    List<Servicios.Model.ProductoDibujosAnimados> oListProductoDibujoAnimados = new List<Servicios.Model.ProductoDibujosAnimados>();
-    List<Servicios.Model.ProductoSimbolo> oListProductoSimbolo = new List<Servicios.Model.ProductoSimbolo>();
+    List<Servicios.Model.ProductoDibujosAnimados> oListProductoDibujoAnimados = new Servicios.Servicios.SrvProductoDibujosAnimados().GetListProductosAnimados();
+    List<Servicios.Model.ProductoSimbolo> oListProductoSimbolo = new Servicios.Servicios.SrvProductoSimbolo().GetListProductoSimbolo();
 }
-<div class="products">
-    <div class="container">
-        <h3><span>Signos Zodiacales</span></h3>
-        <div class="products-top">
-            @foreach (var item in Model)
-            {
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="products">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6" style="margin-bottom:15px;margin-top:15px">
-                            <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
-                                <image src="~/@item.ImagenPortada" width="200" height="200" class="img-responsive rotateIn"></image>
+                    <h3><span style="margin-left:10px; font-size:30px;">Signos Zodiacales</span></h3>
+                    <div class="products-top">
+                        @foreach (var item in Model)
+                        {
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6" style="margin-bottom:15px;margin-top:15px">
+                                        <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
+                                            <image src="~/@item.ImagenPortada" width="200" height="200" class="img-responsive rotateIn"></image>
+                                        </div>
+                                        <div class="col-md-2 text-center bounceInDown">
+                                            @item.Nombre
+                                        </div>
+                                        <div class="col-md-3 text-justify bounceInDown">
+                                            @item.Descripcion
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3 text-center bounceInDown">
-                                @item.Nombre
-                            </div>
-                            <div class="col-md-3 text-justify bounceInDown">
-                                @item.Descripcion
-                            </div>
-                        </div>
+                        }
+                        <div class="clearfix"> </div>
                     </div>
                 </div>
-            }
-
-            @foreach (var itemListaPAnimados in oListProductoDibujoAnimados)
-            {
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="products">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6" style="margin-bottom:15px;margin-top:15px">
-                            <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
-                                <image src="~/@itemListaPAnimados.ImagenPortadaDibujo" width="200" height="200" class="img-responsive rotateIn"></image>
+                    <h3><span style="margin-left:10px; font-size:30px;">Dibujos Animados</span></h3>
+                    <div class="products-top">
+                        @foreach (var itemListaPAnimados in oListProductoDibujoAnimados)
+                        {
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6" style="margin-bottom:15px;margin-top:15px">
+                                        <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
+                                            <image src="~/@itemListaPAnimados.ImagenPortadaDibujo" width="200" height="200" class="img-responsive rotateIn"></image>
+                                        </div>
+                                        <div class="col-md-2 text-center bounceInDown">
+                                            @itemListaPAnimados.NombreDibujo
+                                        </div>
+                                        <div class="col-md-3 text-justify bounceInDown">
+                                            @itemListaPAnimados.DescripcionDibujo
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3 text-center bounceInDown">
-                                @itemListaPAnimados.NombreDibujo
-                            </div>
-                            <div class="col-md-3 text-justify bounceInDown">
-                                @itemListaPAnimados.DescripcionDibujo
-                            </div>
-                        </div>
+                        }
+                        <div class="clearfix"> </div>
                     </div>
                 </div>
-            }
-            <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="products">
+                <div class="container">
+                    <h3><span style="margin-left:10px; font-size:30px;">Símbolos</span></h3>
+                    <div class="products-top">
+                        @foreach (var itemListaSimbolos in oListProductoSimbolo)
+                        {
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6" style="margin-bottom:15px;margin-top:15px">
+                                        <div id="imageContent" class="col-md-3 prod-1 img-thumbnail text-center">
+                                            <image src="~/@itemListaSimbolos.ImagenPortadaSimbolo" width="200" height="200" class="img-responsive rotateIn"></image>
+                                        </div>
+                                        <div class="col-md-2 text-center bounceInDown">
+                                            @itemListaSimbolos.NombreSimbolo
+                                        </div>
+                                        <div class="col-md-3 text-justify bounceInDown">
+                                            @itemListaSimbolos.DescripcionSimbolo
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

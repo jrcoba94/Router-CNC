@@ -1,0 +1,51 @@
+﻿@model Servicios.Model.Usuario
+
+<div>
+    <h4>Signos Zodiacales</h4>
+    <hr />
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="form-horizontal">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NombreUsuario)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NombreUsuario)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ApellidoPaterno)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ApellidoPaterno)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ApellidoMaterno)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ApellidoMaterno)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CorreoElectronico)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CorreoElectronico)
+                    </dd>
+                </dl>
+            </div>
+            <p>
+                @*@Html.ActionLink("Edit", "Edit", new { id = Model.ProductoID }) |*@
+                <button class="btn btn-default">
+                    @Html.ActionLink("Volver", "Index")
+                </button>
+            </p>
+        </div>
+    </div>
+</div>

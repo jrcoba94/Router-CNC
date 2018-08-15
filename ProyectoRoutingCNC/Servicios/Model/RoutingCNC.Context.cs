@@ -29,6 +29,7 @@ namespace Servicios.Model
         public virtual DbSet<ImagenProducto> ImagenProducto { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<ProductoDibujosAnimados> ProductoDibujosAnimados { get; set; }
+        public virtual DbSet<ProductoFigurasGeometricas> ProductoFigurasGeometricas { get; set; }
         public virtual DbSet<ProductoSimbolo> ProductoSimbolo { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuariosPanel> UsuariosPanel { get; set; }

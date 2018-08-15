@@ -9,9 +9,10 @@
         <EntityTypeShape EntityType="RoutingCNCModel.ImagenProducto" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="RoutingCNCModel.Producto" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="RoutingCNCModel.ProductoDibujosAnimados" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="RoutingCNCModel.ProductoSimbolo" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="RoutingCNCModel.Usuario" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="RoutingCNCModel.UsuariosPanel" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RoutingCNCModel.ProductoFigurasGeometricas" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RoutingCNCModel.ProductoSimbolo" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RoutingCNCModel.Usuario" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RoutingCNCModel.UsuariosPanel" Width="1.5" PointX="0.75" PointY="7.75" />
         <AssociationConnector Association="RoutingCNCModel.FK_ImagenProducto_Producto" />
       </Diagram>
     </edmx:Diagrams>

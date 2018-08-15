@@ -45,6 +45,17 @@
           <Property Name="ImagenPortadaDibujo" Type="nvarchar" MaxLength="150" />
           <Property Name="Estatus" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProductoFigurasGeometricas">
+          <Key>
+            <PropertyRef Name="ProductoFiguraID" />
+          </Key>
+          <Property Name="ProductoFiguraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreFigura" Type="nvarchar" MaxLength="30" />
+          <Property Name="DescripcionFigura" Type="nvarchar" MaxLength="300" />
+          <Property Name="CaracteristicasFigura" Type="nvarchar" MaxLength="300" />
+          <Property Name="ImagenPortadaFigura" Type="nvarchar" MaxLength="150" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductoSimbolo">
           <Key>
             <PropertyRef Name="ProductoSimboloID" />
@@ -99,6 +110,7 @@
           <EntitySet Name="ImagenProducto" EntityType="Self.ImagenProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductoDibujosAnimados" EntityType="Self.ProductoDibujosAnimados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoFigurasGeometricas" EntityType="Self.ProductoFigurasGeometricas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductoSimbolo" EntityType="Self.ProductoSimbolo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuariosPanel" EntityType="Self.UsuariosPanel" Schema="dbo" store:Type="Tables" />
@@ -116,6 +128,7 @@
           <EntitySet Name="ImagenProducto" EntityType="RoutingCNCModel.ImagenProducto" />
           <EntitySet Name="Producto" EntityType="RoutingCNCModel.Producto" />
           <EntitySet Name="ProductoDibujosAnimados" EntityType="RoutingCNCModel.ProductoDibujosAnimados" />
+          <EntitySet Name="ProductoFigurasGeometricas" EntityType="RoutingCNCModel.ProductoFigurasGeometricas" />
           <EntitySet Name="ProductoSimbolo" EntityType="RoutingCNCModel.ProductoSimbolo" />
           <EntitySet Name="Usuario" EntityType="RoutingCNCModel.Usuario" />
           <EntitySet Name="UsuariosPanel" EntityType="RoutingCNCModel.UsuariosPanel" />
@@ -164,6 +177,17 @@
           <Property Name="DescripcionDibujo" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="CaracteristicasDibujo" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ImagenPortadaDibujo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductoFigurasGeometricas">
+          <Key>
+            <PropertyRef Name="ProductoFiguraID" />
+          </Key>
+          <Property Name="ProductoFiguraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreFigura" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionFigura" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CaracteristicasFigura" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ImagenPortadaFigura" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Estatus" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductoSimbolo">
@@ -262,6 +286,18 @@
                 <ScalarProperty Name="DescripcionDibujo" ColumnName="DescripcionDibujo" />
                 <ScalarProperty Name="NombreDibujo" ColumnName="NombreDibujo" />
                 <ScalarProperty Name="ProductoDibujosAnimadosID" ColumnName="ProductoDibujosAnimadosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoFigurasGeometricas">
+            <EntityTypeMapping TypeName="RoutingCNCModel.ProductoFigurasGeometricas">
+              <MappingFragment StoreEntitySet="ProductoFigurasGeometricas">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="ImagenPortadaFigura" ColumnName="ImagenPortadaFigura" />
+                <ScalarProperty Name="CaracteristicasFigura" ColumnName="CaracteristicasFigura" />
+                <ScalarProperty Name="DescripcionFigura" ColumnName="DescripcionFigura" />
+                <ScalarProperty Name="NombreFigura" ColumnName="NombreFigura" />
+                <ScalarProperty Name="ProductoFiguraID" ColumnName="ProductoFiguraID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

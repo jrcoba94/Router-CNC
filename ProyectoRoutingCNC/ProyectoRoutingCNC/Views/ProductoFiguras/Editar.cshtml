@@ -1,23 +1,22 @@
-﻿@model Servicios.Model.ProductoDibujosAnimados
+﻿@model Servicios.Model.ProductoFigurasGeometricas
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br /><br /><br /><br />
-<h5 class="text-center">Editar información</h5>
-@using (Html.BeginForm("Edit", "ProductoDibujosAnimados", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h5 class="text-center" style="margin-left:-10px;">Editar información</h5>
+@using (Html.BeginForm("Edit", "ProductoFiguras", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <br />
     <div class="content-wrapper">
         <div class="container-fluid">
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.ProductoDibujosAnimadosID)
+                @Html.HiddenFor(model => model.ProductoFiguraID)
                 <div class="card mb-3">
                     <div class="card-header" style="background-color:#333333; color:#FFFFFF">
-                        <i></i> Editar dibujo
+                        <i></i> Editar signo
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -26,8 +25,8 @@
                                     <strong>Nombre</strong>
                                 </div>
                                 <div class="col-md-12">
-                                    @Html.EditorFor(model => model.NombreDibujo, new { htmlAttributes = new { @class = "form-control", @maxlength = "30", @required = "required" } })
-                                    @Html.ValidationMessageFor(model => model.NombreDibujo, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.NombreFigura, new { htmlAttributes = new { @class = "form-control", @maxlength = "30", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.NombreFigura, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -37,8 +36,8 @@
                                     <strong>Descripción</strong>
                                 </div>
                                 <div class="col-md-12">
-                                    @Html.EditorFor(model => model.DescripcionDibujo, new { htmlAttributes = new { @class = "form-control", @maxlength = "300", @required = "required" } })
-                                    @Html.ValidationMessageFor(model => model.DescripcionDibujo, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.DescripcionFigura, new { htmlAttributes = new { @class = "form-control", @maxlength = "300", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.DescripcionFigura, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -47,27 +46,16 @@
                                     <strong>Características</strong>
                                 </div>
                                 <div class="col-md-12">
-                                    @Html.EditorFor(model => model.CaracteristicasDibujo, new { htmlAttributes = new { @class = "form-control", @maxlength = "300", @required = "required" } })
-                                    @Html.ValidationMessageFor(model => model.CaracteristicasDibujo, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.CaracteristicasFigura, new { htmlAttributes = new { @class = "form-control", @maxlength = "300", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.CaracteristicasFigura, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
-                        @*<div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <strong>Categoría</strong>
-                                    </div>
-                                    <div class="col-md-10">
-                                        @Html.DropDownList("ProveedorID", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.ProveedorID, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>*@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div id="divInputLoad" class="col-md-6">
                                     <div id="divFileUpload">
-                                        <input id="file-upload" type="file" name="files" accept="image/*" />
+                                        <input id="file-upload" type="file" name="files" accept="image/*" required/>
                                     </div>
                                     <div id="file-preview-zone">
                                     </div>
@@ -90,3 +78,14 @@
     </div>
 }
 
+@*<div class="col-md-4">
+        <div class="form-group">
+            <div class="col-md-12">
+                <strong>Categoría</strong>
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownList("ProveedorID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProveedorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>*@
