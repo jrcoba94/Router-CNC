@@ -9,6 +9,7 @@ using Servicios.Model;
 using Servicios.Servicios;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Script.Serialization;
+using ProyectoRoutingCNC.CorreoGmail;
 
 namespace ProyectoTelas.Controllers
 {
@@ -229,11 +230,27 @@ namespace ProyectoTelas.Controllers
                     //using (RoutingCNCEntities db = new RoutingCNCEntities())
                     //{
 
-                        //oContacto.CorreoElectronico = correo;
-                        //db.Contacto.Add(oContacto);
-                        //db.SaveChanges();
-                        //return RedirectToAction("Index");
+                    //oContacto.CorreoElectronico = correo;
+                    //db.Contacto.Add(oContacto);
+                    //db.SaveChanges();
+                    //return RedirectToAction("Index");
                     //}
+
+                    #region Usando la clase ConnectPop Para la bandeja de entrada de Gmail
+
+                    //creamos el objeto
+                    ConnectPop oConnectPop = new ConnectPop();
+
+                    //invocamos el metodo para obtener mensajes
+                    List<OpenPop.Mime.Message> lstMensajes = oConnectPop.getMensajes();
+
+                    //recorremos y mostramos el asunto
+                    foreach (OpenPop.Mime.Message oMensaje in lstMensajes)
+                    {
+                        Console.WriteLine(oMensaje.Headers.Subject);
+                    }
+
+                    #endregion
                 }
             }
             catch (Exception ex)
