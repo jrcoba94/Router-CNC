@@ -42,9 +42,11 @@
                                     <td>@Html.DisplayFor(modelItem => item.Caracteristicas)</td>
                                     <td><img src="@item.ImagenPortada" height="80" width="80" /></td>
                                     <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.ProductoID })
+                                        <a href="@Url.Action("Edit","Productos", new { id = item.ProductoID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;">Editar</a>
+                                        <a href="@Url.Action("Delete","Productos", new { id = item.ProductoID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;">Eliminar</a>
+                                        @*@Html.ActionLink("Editar", "Edit", new { id = item.ProductoID })*@
                                         @*@Html.ActionLink("Detalle", "Detalles", new { id = item.ProductoID })*@
-                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID }, new { onclick = "return confirm('¿Desea eliminar este registro?');" })
+                                        @*@Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID }, new { onclick = "return confirm('¿Desea eliminar este registro?');" })*@
                                     </td>
                                 </tr>                               
                             </tbody>

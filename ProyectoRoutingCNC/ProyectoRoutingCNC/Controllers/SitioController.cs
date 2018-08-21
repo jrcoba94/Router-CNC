@@ -194,7 +194,17 @@ namespace ProyectoTelas.Controllers
                     MailMessage MensajeCorreo = new MailMessage();
 
                     var senderemail = new MailAddress("proyectoroutingcnc@gmail.com", "CNC");
-                    var receiveremail = new MailAddress(receiverEmail, "Recibido");
+                    var receiveremail = new MailAddress(receiverEmail, "Cliente");
+
+                    //Agregado
+                    //MensajeCorreo.Subject = "null asunto";
+                    MensajeCorreo.SubjectEncoding = System.Text.Encoding.UTF8;
+                    //MensajeCorreo.Body = "null body";
+                    MensajeCorreo.BodyEncoding = System.Text.Encoding.UTF8;
+                    //Si no queremos que el Body se envie como HTML
+                    //MensajeCorreo.IsBodyHtml = false;
+                    //Fin de lo agregado
+
 
                     var password = "Proyecto123";
                     var sub = subject;

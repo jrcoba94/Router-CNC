@@ -42,9 +42,11 @@
                                     <td>@Html.DisplayFor(modelItem => item.CaracteristicasSimbolo)</td>
                                     <td><img src="@item.ImagenPortadaSimbolo" height="80" width="80" /></td>
                                     <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.ProductoSimboloID })
+                                        <a href="@Url.Action("Edit","ProductoSimbolo", new { id = item.ProductoSimboloID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;">Editar</a>
+                                        <a href="@Url.Action("Delete","ProductoSimbolo", new { id = item.ProductoSimboloID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;">Eliminar</a>
+                                        @*@Html.ActionLink("Editar", "Edit", new { id = item.ProductoSimboloID })*@
                                         @*@Html.ActionLink("Detalle", "Detalles", new { id = item.ProductoSimboloID })*@
-                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoSimboloID })
+                                        @*@Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoSimboloID })*@
                                     </td>
                                 </tr>
                             </tbody>
