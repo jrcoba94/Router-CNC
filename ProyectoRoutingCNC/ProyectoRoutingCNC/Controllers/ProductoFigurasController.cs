@@ -25,7 +25,34 @@ namespace ProyectoRoutingCNC.Controllers
         // GET: ProductoFiguras
         public ActionResult Index(int? page)
         {
-            return View(db.ProductoFigurasGeometricas.ToList().ToPagedList(page ?? 1, 5));
+            try
+            {
+                ViewBag.MensajeExitoso = TempData["MensajeExitoso"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                ViewBag.MensajeActualizar = TempData["MensajeActualizar"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                ViewBag.MensajeEliminar = TempData["MensajeEliminar"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            return View(db.ProductoFigurasGeometricas.ToList().ToPagedList(page ?? 1, 30));
         }
 
         public ActionResult CrearFigura()
@@ -69,39 +96,51 @@ namespace ProyectoRoutingCNC.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
-                    HttpPostedFileBase file = Request.Files["files"];
-                    var directorio = UploadDirectory;
-                    string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
-                    string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
-                    string resultFileUrl = directorio + resultFileName;
-                    string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
-
-                    bool hasFile = false;
-                    ImagenProducto oImgProduct = null;
-
-                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    try
                     {
-                        file.SaveAs(resultFilePath);
-                        oProductoFigurasGeometricas.ImagenPortadaFigura = /*servername +*/ resultFileUrl.Replace("~/", "");
+                        UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
+                        HttpPostedFileBase file = Request.Files["files"];
+                        var directorio = UploadDirectory;
+                        string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
+                        string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
+                        string resultFileUrl = directorio + resultFileName;
+                        string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
 
-                        oImgProduct = new ImagenProducto();
-                        oImgProduct.Url = oProductoFigurasGeometricas.ImagenPortadaFigura.Replace("~/", "");
+                        bool hasFile = false;
+                        ImagenProducto oImgProduct = null;
 
-                        hasFile = true;
-                    }
+                        if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                        {
+                            file.SaveAs(resultFilePath);
+                            oProductoFigurasGeometricas.ImagenPortadaFigura = /*servername +*/ resultFileUrl.Replace("~/", "");
 
-                    db.ProductoFigurasGeometricas.Add(oProductoFigurasGeometricas);
-                    db.SaveChanges();
+                            oImgProduct = new ImagenProducto();
+                            oImgProduct.Url = oProductoFigurasGeometricas.ImagenPortadaFigura.Replace("~/", "");
 
-                    oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
-                    db.ImagenProducto.Add(oImgProduct);
-                    db.SaveChanges();
+                            hasFile = true;
+                        }
 
-                    if (hasFile)
-                    {
-                        oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
+                        db.ProductoFigurasGeometricas.Add(oProductoFigurasGeometricas);
                         db.SaveChanges();
+
+
+                        oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
+                        db.ImagenProducto.Add(oImgProduct);
+                        db.SaveChanges();
+
+                        //Mensaje que se imprime en un alert
+                        TempData["MensajeExitoso"] = "El registro se agrego de manera exitosa.";
+                        ViewBag.MensajeExitoso = TempData["MensajeExitoso"];
+
+                        if (hasFile)
+                        {
+                            oImgProduct.ProductoID = oProductoFigurasGeometricas.ProductoFiguraID;
+                            db.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(SrvMessages.getMessageSQL(ex));
                     }
 
 
@@ -185,6 +224,10 @@ namespace ProyectoRoutingCNC.Controllers
 
                     db.Entry(oProductoFigurasGeometricas).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    TempData["MensajeActualizar"] = "La información se actualizo correctamente.";
+                    ViewBag.MensajeActualizar = TempData["MensajeActualizar"];
+
                     return RedirectToAction("Index");
                 }
             }
@@ -207,12 +250,30 @@ namespace ProyectoRoutingCNC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductoFigurasGeometricas oProductoFigurasGeometricas = db.ProductoFigurasGeometricas.Find(id);
-            if (oProductoFigurasGeometricas == null)
+            //ProductoFigurasGeometricas oProductoFigurasGeometricas = db.ProductoFigurasGeometricas.Find(id);
+            //if (oProductoFigurasGeometricas == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View("Eliminar", oProductoFigurasGeometricas);
+
+            try
             {
-                return HttpNotFound();
+                ProductoFigurasGeometricas oProductoFigurasGeometricas = db.ProductoFigurasGeometricas.Find(id);
+                db.ProductoFigurasGeometricas.Remove(oProductoFigurasGeometricas);
+                oProductoFigurasGeometricas.Estatus = false;
+                db.SaveChanges();
+                TempData["MensajeEliminar"] = "El registro de elimino correctamente.";
+                ViewBag.MensajeEliminar = TempData["MensajeEliminar"];
+                return RedirectToAction("Index");
             }
-            return View("Eliminar", oProductoFigurasGeometricas);
+            catch (Exception ex)
+            {
+                //TempData["MensajeEliminar"] = "No se pudo eliminar el registro.";
+                //ViewBag.MensajeEliminar = TempData["MensajeEliminar"];
+                throw new Exception(SrvMessages.getMessageSQL(ex));
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Productos/Delete/5

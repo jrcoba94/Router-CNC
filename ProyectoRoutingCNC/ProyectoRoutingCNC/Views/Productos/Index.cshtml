@@ -3,6 +3,38 @@
 
 @model  IPagedList<Servicios.Model.Producto>
 
+<br /><br /><br /><br />
+@if (@ViewBag.MensajeActualizar != null)
+{
+    <div class="col-md-12">
+        <div class="alert alert-success alert-dismissable" id="close-alert" style="margin-left:250px; margin-right:5px;">
+            <button type="button" class="close" data-dissmiss="alert" aria-hidden="true"></button>
+            <h4><i class="icon fa fa-refresh"></i>¡@ViewBag.MensajeActualizar!</h4>
+        </div>
+    </div>
+}
+
+@if (@ViewBag.MensajeEliminar != null)
+{
+    <div class="col-md-12">
+        <div class="alert alert-success alert-dismissable" id="close-alert" style="margin-left:250px; margin-right:5px;">
+            <button type="button" class="close" data-dissmiss="alert" aria-hidden="true"></button>
+            <h4><i class="icon fa fa-check"></i>¡@ViewBag.MensajeEliminar!</h4>
+        </div>
+    </div>
+}
+
+@if (@ViewBag.MensajeExitoso != null)
+{
+    <div class="col-md-12">
+        <div class="alert alert-success alert-dismissable" id="close-alert" style="margin-left:250px; margin-right:5px;">
+            <button type="button" class="close" data-dissmiss="alert" aria-hidden="true"></button>
+            <h4><i class="icon fa fa-check"></i>¡@ViewBag.MensajeExitoso!</h4>
+        </div>
+    </div>
+}
+
+
 <h1 class="text-center">Signos Zodiacales</h1>
 
 <div class="content-wrapper">
@@ -42,8 +74,8 @@
                                     <td>@Html.DisplayFor(modelItem => item.Caracteristicas)</td>
                                     <td><img src="@item.ImagenPortada" height="80" width="80" /></td>
                                     <td>
-                                        <a href="@Url.Action("Edit","Productos", new { id = item.ProductoID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;">Editar</a>
-                                        <a href="@Url.Action("Delete","Productos", new { id = item.ProductoID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;">Eliminar</a>
+                                        <a href="@Url.Action("Edit","Productos", new { id = item.ProductoID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;" name="Editar" id="btnEditar">Editar</a>
+                                        <a href="@Url.Action("Delete","Productos", new { id = item.ProductoID })" class="btn btn-default btn-block" style="background-color:#000000; color:#FFFFFF;" name="Eliminar" id="btnEliminar">Eliminar</a>
                                         @*@Html.ActionLink("Editar", "Edit", new { id = item.ProductoID })*@
                                         @*@Html.ActionLink("Detalle", "Detalles", new { id = item.ProductoID })*@
                                         @*@Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID }, new { onclick = "return confirm('¿Desea eliminar este registro?');" })*@
@@ -57,4 +89,33 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    //Codigos para ocultar el alert de diferentes formas
+
+    //$(document).ready(function () {
+    //    setTimeout(function () {
+    //        $(".alert").alert('close');
+    //    }, 2000);
+    //});
+
+    //Fin de los codigos
+    
+
+    $(document).ready(function () {
+        $(".alert").delay(3000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name='Eliminar']").click(function () {
+            return confirm('¿Desea eliminar este registro?');
+        });
+    });
+</script>
 

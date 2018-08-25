@@ -23,7 +23,34 @@ namespace ProyectoRoutingCNC.Controllers
         // GET: ProductoDibujosAnimados
         public ActionResult Index(int? page)
         {
-            return View(db.ProductoDibujosAnimados.ToList().ToPagedList(page ?? 1, 5));
+            try
+            {
+                ViewBag.MensajeExitoso = TempData["MensajeExitoso"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                ViewBag.MensajeActualizar = TempData["MensajeActualizar"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                ViewBag.MensajeEliminar = TempData["MensajeEliminar"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            return View(db.ProductoDibujosAnimados.ToList().ToPagedList(page ?? 1, 30));
         }
 
         public ActionResult CrearDibujo()
@@ -72,40 +99,50 @@ namespace ProyectoRoutingCNC.Controllers
 
                 if (ModelState.IsValid)
                 {
-
-                    UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
-                    HttpPostedFileBase file = Request.Files["files"];
-                    var directorio = UploadDirectory;
-                    string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
-                    string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
-                    string resultFileUrl = directorio + resultFileName;
-                    string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
-
-                    bool hasFile = false;
-                    ImagenProducto oImgProduct = null;
-
-                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    try
                     {
-                        file.SaveAs(resultFilePath);
-                        oProductoDibujosAnimados.ImagenPortadaDibujo = /*servername +*/ resultFileUrl.Replace("~/", "");
+                        UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
+                        HttpPostedFileBase file = Request.Files["files"];
+                        var directorio = UploadDirectory;
+                        string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
+                        string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
+                        string resultFileUrl = directorio + resultFileName;
+                        string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
 
-                        oImgProduct = new ImagenProducto();
-                        oImgProduct.Url = oProductoDibujosAnimados.ImagenPortadaDibujo.Replace("~/", "");
+                        bool hasFile = false;
+                        ImagenProducto oImgProduct = null;
 
-                        hasFile = true;
-                    }
+                        if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                        {
+                            file.SaveAs(resultFilePath);
+                            oProductoDibujosAnimados.ImagenPortadaDibujo = /*servername +*/ resultFileUrl.Replace("~/", "");
 
-                    db.ProductoDibujosAnimados.Add(oProductoDibujosAnimados);
-                    db.SaveChanges();
+                            oImgProduct = new ImagenProducto();
+                            oImgProduct.Url = oProductoDibujosAnimados.ImagenPortadaDibujo.Replace("~/", "");
 
-                    oImgProduct.ProductoID = oProductoDibujosAnimados.ProductoDibujosAnimadosID;
-                    db.ImagenProducto.Add(oImgProduct);
-                    db.SaveChanges();
+                            hasFile = true;
+                        }
 
-                    if (hasFile)
-                    {
-                        oImgProduct.ProductoID = oProductoDibujosAnimados.ProductoDibujosAnimadosID;
+                        db.ProductoDibujosAnimados.Add(oProductoDibujosAnimados);
                         db.SaveChanges();
+
+                        oImgProduct.ProductoID = oProductoDibujosAnimados.ProductoDibujosAnimadosID;
+                        db.ImagenProducto.Add(oImgProduct);
+                        db.SaveChanges();
+
+                        //Mensaje que se imprime en un alert
+                        TempData["MensajeExitoso"] = "El registro se agrego de manera exitosa.";
+                        ViewBag.MensajeExitoso = TempData["MensajeExitoso"];
+
+                        if (hasFile)
+                        {
+                            oImgProduct.ProductoID = oProductoDibujosAnimados.ProductoDibujosAnimadosID;
+                            db.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(SrvMessages.getMessageSQL(ex));
                     }
 
 
@@ -189,6 +226,10 @@ namespace ProyectoRoutingCNC.Controllers
 
                     db.Entry(oProductoDibujosAnimados).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    TempData["MensajeActualizar"] = "La información se actualizo correctamente.";
+                    ViewBag.MensajeActualizar = TempData["MensajeActualizar"];
+
                     return RedirectToAction("Index");
                 }
             }
@@ -211,12 +252,31 @@ namespace ProyectoRoutingCNC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductoDibujosAnimados oProductoDibujosAnimados = db.ProductoDibujosAnimados.Find(id);
-            if (oProductoDibujosAnimados == null)
+            //ProductoDibujosAnimados oProductoDibujosAnimados = db.ProductoDibujosAnimados.Find(id);
+            //if (oProductoDibujosAnimados == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            try
             {
-                return HttpNotFound();
+                ProductoDibujosAnimados oProductoDibujosAnimados = db.ProductoDibujosAnimados.Find(id);
+                db.ProductoDibujosAnimados.Remove(oProductoDibujosAnimados);
+                oProductoDibujosAnimados.Estatus = false;
+                db.SaveChanges();
+                TempData["MensajeEliminar"] = "El registro de elimino correctamente.";
+                ViewBag.MensajeEliminar = TempData["MensajeEliminar"];
+                return RedirectToAction("Index");
             }
-            return View("Eliminar", oProductoDibujosAnimados);
+            catch (Exception ex)
+            {
+                //TempData["MensajeEliminar"] = "No se pudo eliminar el registro.";
+                //ViewBag.MensajeEliminar = TempData["MensajeEliminar"];
+                throw new Exception(SrvMessages.getMessageSQL(ex));
+                return RedirectToAction("Index");
+            }
+
+            //return View("Eliminar", oProductoDibujosAnimados);
         }
 
         // POST: Productos/Delete/5

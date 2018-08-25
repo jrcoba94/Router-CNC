@@ -3,6 +3,38 @@
 
 @model  IPagedList<Servicios.Model.ProductoFigurasGeometricas>
 
+<br /><br /><br /><br />
+@if (@ViewBag.MensajeActualizar != null)
+{
+    <div class="col-md-12">
+        <div class="alert alert-success alert-dismissable" id="close-alert" style="margin-left:250px; margin-right:5px;">
+            <button type="button" class="close" data-dissmiss="alert" aria-hidden="true"></button>
+            <h4><i class="icon fa fa-refresh"></i>¡@ViewBag.MensajeActualizar!</h4>
+        </div>
+    </div>
+}
+
+@if (@ViewBag.MensajeEliminar != null)
+{
+    <div class="col-md-12">
+        <div class="alert alert-success alert-dismissable" id="close-alert" style="margin-left:250px; margin-right:5px;">
+            <button type="button" class="close" data-dissmiss="alert" aria-hidden="true"></button>
+            <h4><i class="icon fa fa-check"></i>¡@ViewBag.MensajeEliminar!</h4>
+        </div>
+    </div>
+}
+
+@if (@ViewBag.MensajeExitoso != null)
+{
+    <div class="col-md-12">
+        <div class="alert alert-success alert-dismissable" id="close-alert" style="margin-left:250px; margin-right:5px;">
+            <button type="button" class="close" data-dissmiss="alert" aria-hidden="true"></button>
+            <h4><i class="icon fa fa-check"></i>¡@ViewBag.MensajeExitoso!</h4>
+        </div>
+    </div>
+}
+
+
 <h1 class="text-center">Figuras Geométricas</h1>
 
 <div class="content-wrapper">
@@ -57,4 +89,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    //Codigos para ocultar el alert de diferentes formas
+
+    //$(document).ready(function () {
+    //    setTimeout(function () {
+    //        $(".alert").alert('close');
+    //    }, 2000);
+    //});
+
+    //Fin de los codigos
+
+
+    $(document).ready(function () {
+        $(".alert").delay(3000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+    });
+
+</script>
 

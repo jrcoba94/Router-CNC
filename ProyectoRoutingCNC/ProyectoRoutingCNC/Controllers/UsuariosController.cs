@@ -25,7 +25,34 @@ namespace ProyectoRoutingCNC.Controllers
         // GET: Usuarios
         public ActionResult Index(int? page)
         {
-            return View(db.Usuario.ToList().ToPagedList(page ?? 1, 5));
+            try
+            {
+                ViewBag.MensajeExitoso = TempData["MensajeExitoso"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                ViewBag.MensajeActualizar = TempData["MensajeActualizar"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                ViewBag.MensajeEliminar = TempData["MensajeEliminar"].ToString();
+            }
+            catch
+            {
+
+            }
+
+            return View(db.Usuario.ToList().ToPagedList(page ?? 1, 30));
         }
 
         public ActionResult CrearUsuario()
@@ -69,44 +96,12 @@ namespace ProyectoRoutingCNC.Controllers
 
                 if (ModelState.IsValid)
                 {
-
-                    //UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
-                    //HttpPostedFileBase file = Request.Files["files"];
-                    //var directorio = UploadDirectory;
-                    //string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
-                    //string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
-                    //string resultFileUrl = directorio + resultFileName;
-                    //string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
-
-                    //bool hasFile = false;
-                    //ImagenProducto oImgProduct = null;
-
-                    //if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
-                    //{
-                    //    file.SaveAs(resultFilePath);
-                    //    oUsuario.ImagenPortada = /*servername +*/ resultFileUrl.Replace("~/", "");
-
-                    //    oImgProduct = new ImagenProducto();
-                    //    oImgProduct.Url = oUsuario.ImagenPortada.Replace("~/", "");
-
-                    //    hasFile = true;
-                    //}
-
                     db.Usuario.Add(oUsuario);
                     db.SaveChanges();
 
-                    //oImgProduct.ProductoID = producto.ProductoID;
-                    //db.ImagenProducto.Add(oImgProduct);
-                    //db.SaveChanges();
-
-                    //if (hasFile)
-                    //{
-                    //    oImgProduct.ProductoID = producto.ProductoID;
-                    //    db.SaveChanges();
-                    //}
-
-
-                    //}
+                    //Mensaje que se imprime en un alert
+                    TempData["MensajeExitoso"] = "El registro se agrego de manera exitosa.";
+                    ViewBag.MensajeExitoso = TempData["MensajeExitoso"];
 
                     return RedirectToAction("Index");
                 }
@@ -154,38 +149,12 @@ namespace ProyectoRoutingCNC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //UploadDirectory = ProyectoRoutingCNC.Properties.Settings.Default.DirectorioImagenes;
-                    //HttpPostedFileBase file = Request.Files["files"];
-                    //var directorio = UploadDirectory;
-                    //string pathRandom = Path.GetRandomFileName().Replace(/*'.', '-'*/"~/", "");
-                    //string resultFileName = pathRandom + '_' + file.FileName.Replace("~/", "");
-                    //string resultFileUrl = directorio + resultFileName;
-                    //string resultFilePath = System.Web.HttpContext.Current.Request.MapPath(resultFileUrl);
-
-                    //bool hasFile = false;
-                    //ImagenProducto oImgProduct = null;
-                    //if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
-                    //{
-                    //    file.SaveAs(resultFilePath);
-                    //    producto.ImagenPortada = /*servername +*/ resultFileUrl.Replace("~/", "");
-
-                    //    oImgProduct = new ImagenProducto();
-                    //    oImgProduct.Url = producto.ImagenPortada.Replace("~/", "");
-                    //    hasFile = true;
-                    //}
-                    //db.SaveChanges();
-
-                    //oImgProduct.ProductoID = producto.ProductoID;
-                    //db.SaveChanges();
-
-                    //if (hasFile)
-                    //{
-                    //    oImgProduct.ProductoID = producto.ProductoID;
-                    //    db.SaveChanges();
-                    //}
-
                     db.Entry(oUsuario).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    TempData["MensajeActualizar"] = "La información se actualizo correctamente.";
+                    ViewBag.MensajeActualizar = TempData["MensajeActualizar"];
+
                     return RedirectToAction("Index");
                 }
             }
@@ -208,12 +177,31 @@ namespace ProyectoRoutingCNC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario oUsuario = db.Usuario.Find(id);
-            if (oUsuario == null)
+            //Usuario oUsuario = db.Usuario.Find(id);
+            //if (oUsuario == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View("Eliminar", oUsuario);
+
+            try
             {
-                return HttpNotFound();
+                Usuario oUsuario = db.Usuario.Find(id);
+                db.Usuario.Remove(oUsuario);
+                oUsuario.Estatus = false;
+                db.SaveChanges();
+                TempData["MensajeEliminar"] = "El registro de elimino correctamente.";
+                ViewBag.MensajeEliminar = TempData["MensajeEliminar"];
+                return RedirectToAction("Index");
             }
-            return View("Eliminar", oUsuario);
+            catch (Exception ex)
+            {
+                //TempData["MensajeEliminar"] = "No se pudo eliminar el registro.";
+                //ViewBag.MensajeEliminar = TempData["MensajeEliminar"];
+                throw new Exception(SrvMessages.getMessageSQL(ex));
+                return RedirectToAction("Index");
+            }
+
         }
 
         // POST: Productos/Delete/5
