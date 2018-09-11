@@ -54,24 +54,30 @@
                             <div class="form-group">
                                 <div id="divInputLoad" class="col-md-6">
                                     <div id="divFileUpload">
+                                        @*<p id="texto">Seleccione su imagen a cargar</p>*@
+                                        <i class="fa fa-upload"></i>
                                         <input id="file-upload" type="file" name="files" accept="image/*" required/>
                                     </div>
                                     @*<div id="file-preview-zone">
                                     </div>*@
                                 </div>
                             </div>
-                            @*<div class="Msj-Error mrb-0">
-                                @if (ViewBag.Mensaje != null)
-                                {
-                                    <div class="alert alert-success">
-                                        <script type="text/javascript">
-                                            window.onload = function () {
-                                                alert("@ViewBag.Mensaje");
-                                            };
-                                        </script>
-                                    </div>
-                                }
+
+                            @*<div class="form-div">
+                                <form>
+                                    <label for="file" class="input-label">
+                                        <i class="fa fa-upload"></i>
+                                        <span id="label_span">Seleccione sus archivos al cargar</span>
+                                    </label>
+                                    <input type="file" multiple="true" />
+                                </form>
                             </div>*@
+
+                            @*<div id="div_file">
+                                <p id="texto">Seleccione su archivo</p>
+                                <input type="file" id="btn_enviar" />
+                            </div>*@
+
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <input type="submit" value="Guardar" class="btn btn-primary btn-block" />
@@ -111,6 +117,27 @@
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#file").on("change", function () {
+            var files = $(this)[0].files;
+
+            if(file.length >= 2)
+            {             
+                $("#label_span").text(files.length + " Archivos listos para cargar");
+                //alert("Se subieron los archivos");
+            }
+            else
+            {               
+                var filename = e.target.value.split('\\').pop();
+                $("#label_span").text(filename);
+                //alert("Se subio el archivo");
+            }
+        });
+    });
 </script>
 
 
