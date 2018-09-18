@@ -132,6 +132,16 @@
     <Content Include="Content\js\sb-admin.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DLLs\AForge.dll" />
+    <Content Include="DLLs\AForge.Imaging.dll" />
+    <Content Include="DLLs\AForge.Math.dll" />
+    <Content Include="DLLs\AForge.Video.DirectShow.dll" />
+    <Content Include="DLLs\AForge.Video.dll" />
+    <Content Include="DLLs\DXFLib.dll" />
+    <Content Include="DLLs\FastColoredTextBox.dll" />
+    <Content Include="DLLs\SharpDX.DirectInput.dll" />
+    <Content Include="DLLs\SharpDX.dll" />
+    <Content Include="DLLs\virtualJoystick.dll" />
     <Content Include="Global.asax" />
     <Content Include="Iconos\1.jpg" />
     <Content Include="Iconos\4.jpg" />
@@ -315,6 +325,24 @@
     <Compile Include="Controllers\SitioController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="CorreoGmail\ConnectPop.cs" />
+    <Compile Include="GCodeCreation\GCodeFromDrill.cs" />
+    <Compile Include="GCodeCreation\GCodeFromDXF.cs" />
+    <Compile Include="GCodeCreation\GCodeFromFont.cs" />
+    <Compile Include="GCodeCreation\GCodeFromImage.cs" />
+    <Compile Include="GCodeCreation\GCodeFromImage.designer.cs">
+      <DependentUpon>GCodeFromImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GCodeCreation\GCodeFromShape.cs" />
+    <Compile Include="GCodeCreation\GCodeFromShape.designer.cs">
+      <DependentUpon>GCodeFromShape.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GCodeCreation\GCodeFromSVG.cs" />
+    <Compile Include="GCodeCreation\GCodeFromText.cs" />
+    <Compile Include="GCodeCreation\GCodeFromText.designer.cs">
+      <DependentUpon>GCodeFromText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GCodeCreation\gcodeRelated.cs" />
+    <Compile Include="GCodeCreation\svgPalette.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -395,6 +423,26 @@
       <Project>{4dfd9a42-19ab-442f-95f2-b566182f9662}</Project>
       <Name>Servicios</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GCodeCreation\GCodeFromImage.de-DE.resx">
+      <DependentUpon>GCodeFromImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCodeCreation\GCodeFromImage.resx">
+      <DependentUpon>GCodeFromImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCodeCreation\GCodeFromShape.de-DE.resx">
+      <DependentUpon>GCodeFromShape.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCodeCreation\GCodeFromShape.resx">
+      <DependentUpon>GCodeFromShape.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCodeCreation\GCodeFromText.de-DE.resx">
+      <DependentUpon>GCodeFromText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCodeCreation\GCodeFromText.resx">
+      <DependentUpon>GCodeFromText.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
