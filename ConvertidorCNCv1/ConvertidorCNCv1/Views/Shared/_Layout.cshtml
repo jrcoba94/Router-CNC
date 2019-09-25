@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Router CNC</title>
+    <link rel="shortcut icon" href="#">
+    <link href="~/Content/all.css" rel="stylesheet" />
+    <link href="~/Content/PrincipalCNC/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/PrincipalCNC/nice-select.css" rel="stylesheet" />
+    <link href="~/Content/PrincipalCNC/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/PrincipalCNC/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/PrincipalCNC/main.css" rel="stylesheet" />
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/easing.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/hoverIntent.js"></script>
+    <script src="~/Scripts/PrincipalCNC/superfish.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/owl.carousel.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/jquery.sticky.js"></script>
+    <script src="~/Scripts/PrincipalCNC/jquery.nice-select.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/waypoints.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/jquery.counterup.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/parallax.min.js"></script>
+    <script src="~/Scripts/PrincipalCNC/mail-script.js"></script>
+    <script src="~/Scripts/PrincipalCNC/main.js"></script>
+
+    @*<link href="~/Content/css/linearicons.css" rel="stylesheet" />*@
+    @*<link href="~/Content/css/bootstrap.css" rel="stylesheet" />*@
+    
+
+    @*<script src="~/Content/js/vendor/jquery-2.2.4.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>*@
+    @*<script src="~/Content/js/vendor/bootstrap.min.js"></script>*@
+</head>
+<body>
+    <header class="" id="header">
+        <div class="container header-top">
+            <div class="row">
+                <div class="col-6 top-head-left">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-6 top-head-right">
+                    <ul>
+                        <li><a href="tel:+880 012 3654 896"><span>+880 012 3654 896</span> <span class="lnr lnr-phone-handset"></span></a></li>
+                        <li><a href="@Url.Action("Index","Login")">Register / Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+                <div id="logo">
+                    @*<a href="#"><img src="~/Content/img/router.png" alt="" title="" width="72" /></a>*@
+                    <div>
+                        <a style="color:white;font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;font-size:xx-large;">CNC</a><small>router</small>
+                    </div>
+                </div>
+                <div>
+                    <nav id="nav-menu-container" class="text-left">
+                        <ul class="nav-menu">
+                            <li class="menu-active"><a href="@Url.Action("Index","Principal")">Inicio</a></li>
+                            <li><a href="@Url.Action("Conocenos","Principal")">Conocenos</a></li>
+                            <li><a href="@Url.Action("Mision","Principal")">Misión</a></li>
+                            <li><a href="@Url.Action("Vision","Principal")">Visión</a></li>
+                            <li><a href="@Url.Action("Productos","Principal")">Productos</a></li>
+                            <li><a href="@Url.Action("Contacto","Principal")">Contacto</a></li>
+                        </ul>
+                    </nav><!-- #nav-menu-container -->
+                </div>
+            </div>
+        </div>
+    </header><!-- #header -->
+
+
+
+    @RenderBody()
+
+
+    <!-- start footer Area -->
+    <footer class="footer-area section-gap" style="padding-bottom: 10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-sm-6">
+
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+                    <div class="single-footer-widget">
+                        <div class="footer-social d-flex align-items-center">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5  col-md-6 col-sm-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer Area -->
+</body>
+</html>

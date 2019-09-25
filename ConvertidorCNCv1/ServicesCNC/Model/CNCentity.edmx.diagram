@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9f93d48a75a14c71a1f17be18fbb0046" Name="Diagram1">
+        <EntityTypeShape EntityType="RouterCNCModel.Categorias" Width="1.5" PointX="5.75" PointY="5.125" />
+        <EntityTypeShape EntityType="RouterCNCModel.Contactos" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RouterCNCModel.Pedidos" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="RouterCNCModel.ProductoArchivos" Width="1.5" PointX="3" PointY="10.5" />
+        <EntityTypeShape EntityType="RouterCNCModel.ProductoCostos" Width="1.5" PointX="3" PointY="7.75" />
+        <EntityTypeShape EntityType="RouterCNCModel.Productos" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="RouterCNCModel.Roles" Width="1.5" PointX="5.75" PointY="1.75" />
+        <EntityTypeShape EntityType="RouterCNCModel.Usuarios" Width="1.5" PointX="8" PointY="1.375" />
+        <EntityTypeShape EntityType="RouterCNCModel.vwProductosArchivo" Width="1.5" PointX="7.75" PointY="5.125" />
+        <AssociationConnector Association="RouterCNCModel.FK_Pedidos_Contactos" />
+        <AssociationConnector Association="RouterCNCModel.FK_Pedidos_Contactos1" />
+        <AssociationConnector Association="RouterCNCModel.FK_Pedidos_Productos" />
+        <AssociationConnector Association="RouterCNCModel.FK_ProductoArchivos_Productos" />
+        <AssociationConnector Association="RouterCNCModel.FK_ProductoCostos_Productos" />
+        <AssociationConnector Association="RouterCNCModel.FK_Usuarios_Roles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

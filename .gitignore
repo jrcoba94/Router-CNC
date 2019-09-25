@@ -1,8 +1,7 @@
-/ProyectoRoutingCNC/.vs
-/ProyectoRoutingCNC/packages
-/ProyectoRoutingCNC/Servicios/bin
-/ProyectoRoutingCNC/Servicios/obj
-/ProyectoRoutingCNC/ProyectoRoutingCNC/*.user
-/ProyectoRoutingCNC/ProyectoRoutingCNC/ProyectoRoutingCNC.csproj.user
-/ProyectoRoutingCNC/ProyectoRoutingCNC/bin
-/ProyectoRoutingCNC/ProyectoRoutingCNC/obj
+/ConvertidorCNCv1/.vs
+/ConvertidorCNCv1/ConvertidorCNCv1/ConvertidorCNCv1.csproj.user
+/ConvertidorCNCv1/ConvertidorCNCv1/bin
+/ConvertidorCNCv1/ConvertidorCNCv1/obj
+/ConvertidorCNCv1/ServicesCNC/obj
+/ConvertidorCNCv1/ServicesCNC/bin
+/ConvertidorCNCv1/packages

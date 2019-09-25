@@ -1,0 +1,97 @@
+﻿<script type="text/javascript">
+    function sub(obj) {
+        var file = obj.value;
+        var fileName = file.split("\\");
+        $("#btnChooser").val(fileName[fileName.length - 1]);
+        document.myForm.submit();
+        event.preventDefault();
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    function getFilterTab(ev, id, stk) {
+        var pnl = stk;
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GridProductos", "Productos")",
+            data: { idCategoria: id },
+            success: function (res) {
+                $("#Otros").html(res);
+            }
+        })
+    }
+    function LoadModal() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("CreateProducto", "Productos")",
+            success: function (data) {
+                $("#tituloModal").text("Proyecto");
+                $("#modalContainer").html(data);
+                $("#Modal").show('modal');
+            },
+            error: function (data) {
+                $("#Modal").modal('hide');
+                $('#alert_placeholder').addClass("alert-danger").css('display', 'block').html('<span class="fa fa-info-circle"></span> <strong> Error de operación </strong>').delay(4000).slideUp(200, function () {
+                    $(this).alert('hide');
+                });
+            }
+        });
+    };
+    function LoadModalEdit(id) {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("EditProducto", "Productos")",
+            data: { Id: id },
+            success: function (data) {
+                $("#tituloModal").text("Proyecto");
+                $("#modalContainer").html(data);
+                $("#Modal").modal('show');
+            },
+            error: function (data) {
+                $("#Modal").modal('hide');
+                $('#alert_placeholder').addClass("alert-danger").css('display', 'block').html('<span class="fa fa-info-circle"></span> <strong> Error de operación </strong>').delay(4000).slideUp(200, function () {
+                    $(this).alert('hide');
+                });
+            }
+        });
+    };
+    function evSave(ev) {
+        ev.preventDefault();
+        var $formulario = new FormData("#frm");
+        var files = $("#archivourl").get(0).files;
+        var nombre = $("#nombre").val();
+        var categoria = $("#CategoriaId").val();
+        var descripcion = $("#descripcion").val();
+
+        if (files.length > 0) {
+            $formulario.append("archivourl", files[0]);
+        }
+
+        $formulario.append("nombre", nombre);
+        $formulario.append("Categorias.categoriaID", categoria);
+        $formulario.append("descripcion", descripcion);
+
+        $.ajax({
+            type: "POST",
+            url: $("#frm").attr('action'),
+            data: $formulario,
+            async: false,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (data) {
+                var data = JSON.parse(data);
+                $('#Modal').modal('hide');
+                $('#alert_placeholder').addClass("alert-success").css('display', 'block').html('<span class="fa fa-info-circle"></span> <strong> Datos guardados </strong>').delay(4000).slideUp(200, function () {
+                    window.location.reload();
+                    $(this).alert('hide');
+                });
+            },
+            error: function (data) {
+                var data = JSON.parse(data);
+                $('#alert_placeholder').addClass("alert-danger").css('display', 'block').html('<span class="fa fa-info-circle"></span> <strong> ' + data.msj + ' </strong>').delay(4000).slideUp(200, function () {
+                    $(this).alert('hide');
+                });
+            }
+        });
+    }
+</script>

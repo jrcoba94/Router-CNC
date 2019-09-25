@@ -1,0 +1,74 @@
+﻿@model ConvertidorCNC.DOM._ProductoDOM
+@{
+    Layout = null;
+}
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: #d5d5d5 !important;
+            cursor: inherit;
+            display: block;
+        }
+</style>
+@using (Html.BeginForm("Create", "Productos", FormMethod.Post, new { @class = "", role = "form", @enctype = "multipart/form-data", id = "frm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="modal-body" id="formulario" style="margin-right:10px;margin-left:10px">
+        <div class="text-right" style="color:red;padding-bottom:20px">
+            <span>* Información Obligatoria</span>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.nombre, "* Nombre :")
+                @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @required = "", placeholder = "Nombre del proyecto" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Categorias.categoriaID, "Categoría :")
+                <select id="CategoriaId" class="form-control">
+                    <option value="0">-- Seleccione --</option>
+                    @foreach (var item in ServicesCNC.Servicios.SrCoreOD.GetCateorias())
+                    {
+                        <option value="@item.categoriaID">@item.nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.archivourl, "* Archivo :")
+                <div class="input-group form-inline">
+                    <span class="btn btn-default btn-file input-group-addon">
+                        Seleccionar <input id="archivourl" name="archivourl" type="file" class="form-control" accept="image/jpeg, image/png" onchange="sub(this)" />
+                    </span>
+                    <input type="text" id="btnChooser" class="form-control" placeholder="*.jpg | *.png" />
+                </div>
+                <span class="help-block">
+                    Seleccione un solo archivo (.png, .jpg)
+                </span>
+            </div>
+            <div class="form-group col-md-12">
+                @Html.LabelFor(model => model.descripcion, "* Descripción :")
+                @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @required = "", placeholder = "Descripción del proyecto" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success btn-sm" onclick="evSave(event)">Guardar</button>
+    </div>
+}

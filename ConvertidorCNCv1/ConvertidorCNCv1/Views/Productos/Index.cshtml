@@ -1,0 +1,32 @@
+﻿@model List<ServicesCNC.Model.Categorias>
+@RenderPage(Url.Content("~/Views/Productos/ProductosScript.cshtml"))
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="box-header">
+    <h3 class="box-title">Productos</h3>
+</div>
+<div class="box-body">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="Otros-tab" data-toggle="tab" href="#Otros" role="tab" aria-controls="Otros" aria-selected="true">Otros</a>
+        </li>
+        @foreach (var item in Model)
+        {
+            <li class="nav-item">
+                <a class="nav-link" id="@item.stick-tab" data-toggle="tab" href="#@item.stick" role="tab" aria-controls="@item.nombre" aria-selected="false">@item.nombre</a>
+            </li>
+        }
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="Otros" role="tabpanel" aria-labelledby="Otros-tab">
+            @Html.Action("GridProductos", "Productos", new { idCategoria = 0 })
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="tab-pane fade" id="@item.stick" role="tabpanel" aria-labelledby="@item.stick-tab">
+                @Html.Action("GridProductos", "Productos", new { idCategoria = item.categoriaID })
+            </div>
+        }
+    </div>
+</div>

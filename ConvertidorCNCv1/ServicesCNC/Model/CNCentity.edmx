@@ -1,0 +1,586 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RouterCNCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="categoriaID" />
+          </Key>
+          <Property Name="categoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="estatus" Type="bit" Nullable="false" />
+          <Property Name="stick" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contactos">
+          <Key>
+            <PropertyRef Name="contactoID" />
+          </Key>
+          <Property Name="contactoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="correoelectronico" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="100" />
+          <Property Name="comentario" Type="nvarchar(max)" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="30" />
+          <Property Name="celular" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="pedidoID" />
+          </Key>
+          <Property Name="pedidoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productoID" Type="int" Nullable="false" />
+          <Property Name="contactoID" Type="int" Nullable="false" />
+          <Property Name="fechapedido" Type="datetime" Nullable="false" />
+          <Property Name="fechaentrega" Type="datetime" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="dimension1" Type="int" />
+          <Property Name="dimension2" Type="int" />
+          <Property Name="unidadmedida" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ProductoArchivos">
+          <Key>
+            <PropertyRef Name="archivoID" />
+          </Key>
+          <Property Name="archivoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productoID" Type="int" Nullable="false" />
+          <Property Name="tipoarchivo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="archivourl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductoCostos">
+          <Key>
+            <PropertyRef Name="productocostoID" />
+          </Key>
+          <Property Name="productocostoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productoID" Type="int" Nullable="false" />
+          <Property Name="precio" Type="float" Nullable="false" />
+          <Property Name="iva" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="productoID" />
+          </Key>
+          <Property Name="productoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="categoriaID" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="estatus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasenia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="correoelectronico" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rolID" Type="int" Nullable="false" />
+          <Property Name="estatus" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'RouterCNC.dbo.vwProductosArchivo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwProductosArchivo">
+          <Key>
+            <PropertyRef Name="archivoID" />
+            <PropertyRef Name="archivourl" />
+            <PropertyRef Name="productoID" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="descripcion" />
+            <PropertyRef Name="categoria" />
+          </Key>
+          <Property Name="archivoID" Type="int" Nullable="false" />
+          <Property Name="archivourl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="productoID" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="categoriaID" Type="int" />
+          <Property Name="categoria" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Pedidos_Contactos">
+          <End Role="Contactos" Type="Self.Contactos" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contactos">
+              <PropertyRef Name="contactoID" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="contactoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Contactos1">
+          <End Role="Contactos" Type="Self.Contactos" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contactos">
+              <PropertyRef Name="contactoID" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="contactoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoID" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="productoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoArchivos_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ProductoArchivos" Type="Self.ProductoArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoID" />
+            </Principal>
+            <Dependent Role="ProductoArchivos">
+              <PropertyRef Name="productoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoCostos_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ProductoCostos" Type="Self.ProductoCostos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoID" />
+            </Principal>
+            <Dependent Role="ProductoCostos">
+              <PropertyRef Name="productoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="rolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RouterCNCModelStoreContainer">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contactos" EntityType="Self.Contactos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoArchivos" EntityType="Self.ProductoArchivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoCostos" EntityType="Self.ProductoCostos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwProductosArchivo" EntityType="Self.vwProductosArchivo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwProductosArchivo].[archivoID] AS [archivoID], 
+    [vwProductosArchivo].[archivourl] AS [archivourl], 
+    [vwProductosArchivo].[productoID] AS [productoID], 
+    [vwProductosArchivo].[nombre] AS [nombre], 
+    [vwProductosArchivo].[descripcion] AS [descripcion], 
+    [vwProductosArchivo].[categoriaID] AS [categoriaID], 
+    [vwProductosArchivo].[categoria] AS [categoria]
+    FROM [dbo].[vwProductosArchivo] AS [vwProductosArchivo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Pedidos_Contactos" Association="Self.FK_Pedidos_Contactos">
+            <End Role="Contactos" EntitySet="Contactos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Contactos1" Association="Self.FK_Pedidos_Contactos1">
+            <End Role="Contactos" EntitySet="Contactos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Productos" Association="Self.FK_Pedidos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoArchivos_Productos" Association="Self.FK_ProductoArchivos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductoArchivos" EntitySet="ProductoArchivos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoCostos_Productos" Association="Self.FK_ProductoCostos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductoCostos" EntitySet="ProductoCostos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RouterCNCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EntitiesCNC" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorias" EntityType="RouterCNCModel.Categorias" />
+          <EntitySet Name="Contactos" EntityType="RouterCNCModel.Contactos" />
+          <EntitySet Name="Pedidos" EntityType="RouterCNCModel.Pedidos" />
+          <EntitySet Name="ProductoArchivos" EntityType="RouterCNCModel.ProductoArchivos" />
+          <EntitySet Name="ProductoCostos" EntityType="RouterCNCModel.ProductoCostos" />
+          <EntitySet Name="Productos" EntityType="RouterCNCModel.Productos" />
+          <EntitySet Name="Roles" EntityType="RouterCNCModel.Roles" />
+          <EntitySet Name="Usuarios" EntityType="RouterCNCModel.Usuarios" />
+          <EntitySet Name="vwProductosArchivo" EntityType="RouterCNCModel.vwProductosArchivo" />
+          <AssociationSet Name="FK_Pedidos_Contactos" Association="RouterCNCModel.FK_Pedidos_Contactos">
+            <End Role="Contactos" EntitySet="Contactos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Contactos1" Association="RouterCNCModel.FK_Pedidos_Contactos1">
+            <End Role="Contactos" EntitySet="Contactos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Productos" Association="RouterCNCModel.FK_Pedidos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoArchivos_Productos" Association="RouterCNCModel.FK_ProductoArchivos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductoArchivos" EntitySet="ProductoArchivos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoCostos_Productos" Association="RouterCNCModel.FK_ProductoCostos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductoCostos" EntitySet="ProductoCostos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="RouterCNCModel.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="categoriaID" />
+          </Key>
+          <Property Name="categoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="estatus" Type="Boolean" Nullable="false" />
+          <Property Name="stick" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Contactos">
+          <Key>
+            <PropertyRef Name="contactoID" />
+          </Key>
+          <Property Name="contactoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="correoelectronico" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="celular" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pedidos" Relationship="RouterCNCModel.FK_Pedidos_Contactos" FromRole="Contactos" ToRole="Pedidos" />
+          <NavigationProperty Name="Pedidos1" Relationship="RouterCNCModel.FK_Pedidos_Contactos1" FromRole="Contactos" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="pedidoID" />
+          </Key>
+          <Property Name="pedidoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productoID" Type="Int32" Nullable="false" />
+          <Property Name="contactoID" Type="Int32" Nullable="false" />
+          <Property Name="fechapedido" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaentrega" Type="DateTime" Precision="3" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="dimension1" Type="Int32" />
+          <Property Name="dimension2" Type="Int32" />
+          <Property Name="unidadmedida" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contactos" Relationship="RouterCNCModel.FK_Pedidos_Contactos" FromRole="Pedidos" ToRole="Contactos" />
+          <NavigationProperty Name="Contactos1" Relationship="RouterCNCModel.FK_Pedidos_Contactos1" FromRole="Pedidos" ToRole="Contactos" />
+          <NavigationProperty Name="Productos" Relationship="RouterCNCModel.FK_Pedidos_Productos" FromRole="Pedidos" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="ProductoArchivos">
+          <Key>
+            <PropertyRef Name="archivoID" />
+          </Key>
+          <Property Name="archivoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productoID" Type="Int32" Nullable="false" />
+          <Property Name="tipoarchivo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="archivourl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Productos" Relationship="RouterCNCModel.FK_ProductoArchivos_Productos" FromRole="ProductoArchivos" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="ProductoCostos">
+          <Key>
+            <PropertyRef Name="productocostoID" />
+          </Key>
+          <Property Name="productocostoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productoID" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <Property Name="iva" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Productos" Relationship="RouterCNCModel.FK_ProductoCostos_Productos" FromRole="ProductoCostos" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="productoID" />
+          </Key>
+          <Property Name="productoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="categoriaID" Type="Int32" />
+          <NavigationProperty Name="Pedidos" Relationship="RouterCNCModel.FK_Pedidos_Productos" FromRole="Productos" ToRole="Pedidos" />
+          <NavigationProperty Name="ProductoArchivos" Relationship="RouterCNCModel.FK_ProductoArchivos_Productos" FromRole="Productos" ToRole="ProductoArchivos" />
+          <NavigationProperty Name="ProductoCostos" Relationship="RouterCNCModel.FK_ProductoCostos_Productos" FromRole="Productos" ToRole="ProductoCostos" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estatus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="RouterCNCModel.FK_Usuarios_Roles" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contrasenia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="correoelectronico" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rolID" Type="Int32" Nullable="false" />
+          <Property Name="estatus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="RouterCNCModel.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="vwProductosArchivo">
+          <Key>
+            <PropertyRef Name="archivoID" />
+            <PropertyRef Name="archivourl" />
+            <PropertyRef Name="productoID" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="descripcion" />
+            <PropertyRef Name="categoria" />
+          </Key>
+          <Property Name="archivoID" Type="Int32" Nullable="false" />
+          <Property Name="archivourl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="productoID" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="categoriaID" Type="Int32" />
+          <Property Name="categoria" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Pedidos_Contactos">
+          <End Type="RouterCNCModel.Contactos" Role="Contactos" Multiplicity="1" />
+          <End Type="RouterCNCModel.Pedidos" Role="Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contactos">
+              <PropertyRef Name="contactoID" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="contactoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Contactos1">
+          <End Type="RouterCNCModel.Contactos" Role="Contactos" Multiplicity="1" />
+          <End Type="RouterCNCModel.Pedidos" Role="Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contactos">
+              <PropertyRef Name="contactoID" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="contactoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Productos">
+          <End Type="RouterCNCModel.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="RouterCNCModel.Pedidos" Role="Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoID" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="productoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoArchivos_Productos">
+          <End Type="RouterCNCModel.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="RouterCNCModel.ProductoArchivos" Role="ProductoArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoID" />
+            </Principal>
+            <Dependent Role="ProductoArchivos">
+              <PropertyRef Name="productoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoCostos_Productos">
+          <End Type="RouterCNCModel.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="RouterCNCModel.ProductoCostos" Role="ProductoCostos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoID" />
+            </Principal>
+            <Dependent Role="ProductoCostos">
+              <PropertyRef Name="productoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Type="RouterCNCModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="RouterCNCModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="rolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RouterCNCModelStoreContainer" CdmEntityContainer="EntitiesCNC">
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="RouterCNCModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="stick" ColumnName="stick" />
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="categoriaID" ColumnName="categoriaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contactos">
+            <EntityTypeMapping TypeName="RouterCNCModel.Contactos">
+              <MappingFragment StoreEntitySet="Contactos">
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="correoelectronico" ColumnName="correoelectronico" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="contactoID" ColumnName="contactoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidos">
+            <EntityTypeMapping TypeName="RouterCNCModel.Pedidos">
+              <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="unidadmedida" ColumnName="unidadmedida" />
+                <ScalarProperty Name="dimension2" ColumnName="dimension2" />
+                <ScalarProperty Name="dimension1" ColumnName="dimension1" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fechaentrega" ColumnName="fechaentrega" />
+                <ScalarProperty Name="fechapedido" ColumnName="fechapedido" />
+                <ScalarProperty Name="contactoID" ColumnName="contactoID" />
+                <ScalarProperty Name="productoID" ColumnName="productoID" />
+                <ScalarProperty Name="pedidoID" ColumnName="pedidoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoArchivos">
+            <EntityTypeMapping TypeName="RouterCNCModel.ProductoArchivos">
+              <MappingFragment StoreEntitySet="ProductoArchivos">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="archivourl" ColumnName="archivourl" />
+                <ScalarProperty Name="tipoarchivo" ColumnName="tipoarchivo" />
+                <ScalarProperty Name="productoID" ColumnName="productoID" />
+                <ScalarProperty Name="archivoID" ColumnName="archivoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoCostos">
+            <EntityTypeMapping TypeName="RouterCNCModel.ProductoCostos">
+              <MappingFragment StoreEntitySet="ProductoCostos">
+                <ScalarProperty Name="iva" ColumnName="iva" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="productoID" ColumnName="productoID" />
+                <ScalarProperty Name="productocostoID" ColumnName="productocostoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="RouterCNCModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="categoriaID" ColumnName="categoriaID" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="productoID" ColumnName="productoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="RouterCNCModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="rolID" ColumnName="rolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="RouterCNCModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="rolID" ColumnName="rolID" />
+                <ScalarProperty Name="correoelectronico" ColumnName="correoelectronico" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwProductosArchivo">
+            <EntityTypeMapping TypeName="RouterCNCModel.vwProductosArchivo">
+              <MappingFragment StoreEntitySet="vwProductosArchivo">
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="categoriaID" ColumnName="categoriaID" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="productoID" ColumnName="productoID" />
+                <ScalarProperty Name="archivourl" ColumnName="archivourl" />
+                <ScalarProperty Name="archivoID" ColumnName="archivoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

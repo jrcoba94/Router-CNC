@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConvertidorCNCv1", "ConvertidorCNCv1\ConvertidorCNCv1.csproj", "{6DFA31EC-8A1D-4913-B160-55E1CB9E6735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesCNC", "ServicesCNC\ServicesCNC.csproj", "{D295278A-63F9-4FB6-8F3E-60E2CFE51430}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DFA31EC-8A1D-4913-B160-55E1CB9E6735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DFA31EC-8A1D-4913-B160-55E1CB9E6735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DFA31EC-8A1D-4913-B160-55E1CB9E6735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DFA31EC-8A1D-4913-B160-55E1CB9E6735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D295278A-63F9-4FB6-8F3E-60E2CFE51430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D295278A-63F9-4FB6-8F3E-60E2CFE51430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D295278A-63F9-4FB6-8F3E-60E2CFE51430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D295278A-63F9-4FB6-8F3E-60E2CFE51430}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
